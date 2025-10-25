@@ -13,7 +13,7 @@ class Initial extends Migration
      */
     public function up()
     {
-        Schema::table('project_types', function (Blueprint $table) {
+        Schema::create('project_types', function (Blueprint $table) {
             $table->id();
             $table->string('project_type_code', 50)->index()->nullable();
             $table->string('project_type_name', 50)->nullable();
@@ -21,7 +21,7 @@ class Initial extends Migration
             $table->timestamps();
         });
 
-        Schema::table('projects', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_no', 50)->index()->nullable();
             $table->string('project_type_code', 50)->index()->nullable();
@@ -32,7 +32,7 @@ class Initial extends Migration
             $table->timestamps();
         });
 
-        Schema::table('project_members', function (Blueprint $table) {
+        Schema::create('project_members', function (Blueprint $table) {
             $table->id();
             $table->string('project_no', 50)->index()->nullable();
             $table->string('email', 100)->index()->nullable();
@@ -42,7 +42,7 @@ class Initial extends Migration
             $table->timestamps();
         });
 
-        Schema::table('treasuries', function (Blueprint $table) {
+        Schema::create('treasuries', function (Blueprint $table) {
             $table->id();
             $table->string('project_no', 50)->index()->nullable();
             $table->string('treasury_no', 50)->index()->nullable();
@@ -58,21 +58,21 @@ class Initial extends Migration
             $table->timestamps();
         });
 
-        Schema::table('treasury_estimate_balances', function (Blueprint $table) {
+        Schema::create('treasury_estimate_balances', function (Blueprint $table) {
             $table->id();
             $table->string('treasury_no', 50)->index()->nullable();
             $table->bigInteger('value')->nullable()->default(0);
             $table->timestamps();
         });
 
-        Schema::table('treasury_actual_balances', function (Blueprint $table) {
+        Schema::create('treasury_actual_balances', function (Blueprint $table) {
             $table->id();
             $table->string('treasury_no', 50)->index()->nullable();
             $table->bigInteger('value')->nullable()->default(0);
             $table->timestamps();
         });
 
-        Schema::table('debts', function (Blueprint $table) {
+        Schema::create('debts', function (Blueprint $table) {
             $table->id();
             $table->string('debt_no', 50)->index()->nullable();
             $table->string('creditors', 100)->index()->nullable();
@@ -84,7 +84,7 @@ class Initial extends Migration
             $table->timestamps();
         });
 
-        Schema::table('debt_payments', function (Blueprint $table) {
+        Schema::create('debt_payments', function (Blueprint $table) {
             $table->id();
             $table->string('debt_no', 50)->index()->nullable();
             $table->string('treasury_no', 50)->index()->nullable();
