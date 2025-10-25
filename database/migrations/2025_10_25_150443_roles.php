@@ -13,6 +13,13 @@ class Roles extends Migration
      */
     public function up()
     {
+        Schema::table('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('role', 50)->nullable();
+            $table->integer('state')->index()->nullable()->default(1);
+            $table->timestamps();
+        });
+
         Schema::table('users', function (Blueprint $table) {
             $table->integer('role_id')->nullable()->index();
         });
@@ -25,6 +32,8 @@ class Roles extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('roles');
+
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role_id');
         });

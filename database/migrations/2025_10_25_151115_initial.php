@@ -13,13 +13,6 @@ class Initial extends Migration
      */
     public function up()
     {
-        Schema::table('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('role', 50)->nullable();
-            $table->integer('state')->index()->nullable()->default(1);
-            $table->timestamps();
-        });
-
         Schema::table('project_types', function (Blueprint $table) {
             $table->id();
             $table->string('project_type_code', 50)->index()->nullable();
@@ -118,6 +111,5 @@ class Initial extends Migration
         Schema::dropIfExists('project_members');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('project_types');
-        Schema::dropIfExists('roles');
     }
 }
