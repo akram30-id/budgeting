@@ -1,0 +1,34 @@
+name: Deploy Laravel App via SSH
+
+on:
+  push:
+    branches:
+      - master   # Jalankan pipeline setiap ada push ke branch master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SECRET_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Server
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd /var/www/html/porto2025/budgeting
+            git pull origin master
+            composer install --no-dev --optimize-autoloader
+            php artisan cache:clear
+            php artisan config:clear
+            php artisan config:cache
+            php artisan route:cache
+            exit
+          EOF
