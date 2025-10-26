@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index'])->middleware('global.auth');
+
+Route::get('/login', [App\Http\Controllers\UserController::class, 'login']);
+Route::get('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
+
+Route::post('/save-token', [App\Http\Controllers\UserController::class, 'saveTokenToSession'])->name('save.token');
