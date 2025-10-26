@@ -21,6 +21,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-sm-4 col-md-6 col-lg-4">
+                <div id="alert-container"></div>
                 <div class="card p-3 fs-6">
                     <div class="card-body">
                         <div class="text-center mb-4">

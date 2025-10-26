@@ -1,3 +1,4 @@
+import alertComponent from "./components/alert-component.js";
 import csrf_setup from "./csrf_setup.js";
 
 const form = $("#form-sign-in");
@@ -28,13 +29,13 @@ const submitLoginForm = (email, password) => {
             if (response && response.success && response.token) {
                 handleLoginSuccess(response.token);
             } else {
-                alert(response.message || "Login gagal. Silakan coba lagi.");
+                alertComponent.alertFailed(response.message || "Login gagal. Silakan coba lagi.");
             }
         },
         error: function (xhr, status, error) {
             const errorResponse = JSON.parse(xhr.responseText);
 
-            alert(errorResponse.message || "Terjadi kesalahan saat proses login.");
+            alertComponent.alertFailed(errorResponse.message || "Login gagal. Silakan coba lagi.");
         },
     });
 };
@@ -52,11 +53,11 @@ const handleLoginSuccess = (token) => {
             if (response && response.success) {
                 window.location.href = "/";
             } else {
-                alert("Gagal menyimpan token.");
+                alertComponent.alertFailed("Gagal menyimpan token.");
             }
         },
         error: function () {
-            alert("Terjadi kesalahan saat menyimpan token.");
+            alertComponent.alertFailed("Terjadi kesalahan saat menyimpan token.");
         },
     });
 };
