@@ -24,18 +24,23 @@ jobs:
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
             cd /var/www/html/porto2025/budgeting
-            
+      
             git fetch origin master
             git reset --hard origin/master
       
             composer install --no-dev --optimize-autoloader
       
-            # Hapus cache lama secara manual (termasuk bootstrap cache)
+            # Bersihkan cache total
             rm -rf bootstrap/cache/*.php
+            php artisan optimize:clear
+            php artisan optimize
       
             php artisan migrate --force
-            php artisan optimize:clear  # ini clear semua (config, route, view, cache)
-            php artisan optimize        # build ulang semua cache baru
+      
+            # ✅ Pastikan ownership ke web server (ganti www-data jika pakai Apache/Nginx)
+            chown -R www-data:www-data /var/www/html/porto2025/budgeting
+      
             exit
           EOF
+
 
