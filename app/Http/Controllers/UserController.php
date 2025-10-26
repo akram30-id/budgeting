@@ -8,11 +8,12 @@ class UserController extends Controller
 {
     public function login()
     {
+
         $data = [
             'title' => 'F-Finance - Sign In',
             'pageTitle' => 'Sign In',
-            'api_login' => env('APP_URL', 'http://budgeting.test') . '/api/login',
-            'save_token_url' => env('APP_URL', 'http://budgeting.test') . '/save-token',
+            'api_login' => config('services.app_url') . '/api/login',
+            'save_token_url' => config('services.app_url') . '/save-token',
         ];
 
         return view('auth.login', $data);

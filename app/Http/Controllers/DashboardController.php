@@ -9,6 +9,13 @@ class DashboardController extends Controller
     //
     public function index()
     {
-        return view('template');
+        $data = [
+            'title' => 'F-Finance - Dashboard',
+            'pageTitle' => 'Dashboard',
+            'api_logout' => config('services.app_url') . '/api/logout',
+            'api_token' => session('access_token'),
+        ];
+
+        return view('template', $data);
     }
 }

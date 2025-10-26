@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <style>
         body {
             background-color: #f8fbfc;
@@ -41,6 +44,10 @@
 </head>
 
 <body>
+
+    <div id="url" data-api_logout="{{ $api_logout }}"></div>
+    <div id="token" data-access_token="{{ $api_token }}"></div>
+
     <div class="container-fluid">
         <div class="row">
             {{-- Sidebar (Desktop) --}}
@@ -72,13 +79,19 @@
                             <i class="bi bi-gear"></i> Settings
                         </a>
                     </li>
+                    <li class="nav-item">
+                            <a href="#" class="nav-link d-flex align-items-center gap-2 signout">
+                                <i class="bi bi-box-arrow-right"></i> Sign Out
+                            </a>
+                        </li>
                 </ul>
             </nav>
 
             {{-- Top Navbar (Mobile) --}}
             <nav class="navbar navbar-light bg-light d-md-none">
                 <div class="container-fluid">
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
                         <i class="bi bi-list fs-4"></i>
                     </button>
                     <span class="navbar-brand mb-0 h5">Finance Hub</span>
@@ -86,7 +99,8 @@
             </nav>
 
             {{-- Offcanvas Sidebar (Mobile) --}}
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar"
+                aria-labelledby="mobileSidebarLabel">
                 <div class="offcanvas-header">
                     <h5 id="mobileSidebarLabel" class="fw-bold">Finance Hub</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -116,6 +130,11 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link d-flex align-items-center gap-2">
                                 <i class="bi bi-gear"></i> Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link d-flex align-items-center gap-2 signout">
+                                <i class="bi bi-box-arrow-right"></i> Sign Out
                             </a>
                         </li>
                     </ul>
@@ -164,7 +183,8 @@
                             <div>
                                 <p class="fw-medium mb-1">Income vs. Expenses</p>
                                 <h3 class="fw-bold">$150,000</h3>
-                                <p class="text-success fw-medium mb-0">+12% <span class="text-muted">Last 12 Months</span></p>
+                                <p class="text-success fw-medium mb-0">+12% <span class="text-muted">Last 12
+                                        Months</span></p>
                             </div>
                             <canvas id="incomeChart" style="max-height: 180px;"></canvas>
                         </div>
@@ -254,6 +274,8 @@
             }
         });
     </script>
+
+    <script type="module" src="{{ asset('js/logout.js') }}"></script>
 </body>
 
 </html>
