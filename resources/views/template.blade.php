@@ -45,7 +45,7 @@
 
 <body>
 
-    <div id="url" data-api_logout="{{ $api_logout }}"></div>
+    <div id="url" data-api_logout="{{ $api_logout }}" data-url_logout="{{ $url_logout }}"></div>
     <div id="token" data-access_token="{{ $api_token }}"></div>
 
     <div class="container-fluid">

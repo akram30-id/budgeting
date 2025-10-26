@@ -14,6 +14,7 @@ class DashboardController extends Controller
             'pageTitle' => 'Dashboard',
             'api_logout' => config('services.app_url') . '/api/logout',
             'api_token' => session('access_token'),
+            'url_logout' => config('services.app_url') . '/logout',
         ];
 
         return view('template', $data);

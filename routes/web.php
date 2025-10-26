@@ -18,5 +18,6 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('global.auth'
 
 Route::get('/login', [App\Http\Controllers\UserController::class, 'login']);
 Route::get('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
+Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
 
 Route::post('/save-token', [App\Http\Controllers\UserController::class, 'saveTokenToSession'])->name('save.token');

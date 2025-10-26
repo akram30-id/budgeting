@@ -47,4 +47,12 @@ class UserController extends Controller
 
         }
     }
+
+    public function logout(Request $request)
+    {
+        // Clear the access token from the session
+        $request->session()->forget('access_token');
+
+        return redirect('/login');
+    }
 }
