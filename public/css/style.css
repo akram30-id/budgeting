@@ -38,3 +38,10 @@ p {
     font-size: 0.75rem;
     border-radius: 0.15rem;
 }
+
+
+.table td,
+.table th {
+    text-align: center;
+    vertical-align: middle;
+}
