@@ -27,18 +27,21 @@
                 </select>
             </div>
 
-            <div class="mb-3 mt-5">
-                <div class="d-flex align-items-center justify-content-start">
-                    <button class="btn btn-sm btn-outline-dark">Add Cash</button>
-                    <button class="btn btn-sm btn-outline-danger" style="margin-left: 10px;">Export</button>
-                </div>
-            </div>
         </div>
-        <div class="col-sm-9">
-            <div class="row justify-content-end">
+        <div class="col-sm-12 mt-5">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-sm-7">
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <button class="btn btn-sm btn-outline-dark">Add Cash</button>
+                            <button class="btn btn-sm btn-outline-danger" style="margin-left: 10px;">Export</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-5">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" placeholder="search detail, expense, or income here..."
+                        <input type="text" class="form-control form-control-sm"
+                            placeholder="search detail, expense, or income here..."
                             aria-label="search detail, expense, or income here..." aria-describedby="button-addon2">
                         <button class="btn btn-dark" type="button" id="button-addon2">Search</button>
                     </div>
@@ -54,6 +57,7 @@
                         <th>Check</th>
                         <th>Balance</th>
                         <th>Act Balance</th>
+                        <th>###</th>
                     </thead>
                     <tbody id="tbody-treasury-cash">
                         <tr>
