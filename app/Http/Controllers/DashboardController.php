@@ -17,6 +17,6 @@ class DashboardController extends Controller
             'url_logout' => config('services.app_url') . '/logout',
         ];
 
-        return view('template', $data);
+        return view('dashboard', $data);
     }
 }

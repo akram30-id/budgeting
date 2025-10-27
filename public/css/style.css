@@ -1,3 +1,33 @@
 .fs-6 {
     font-size: 0.8rem !important;
 }
+
+body {
+    background-color: #f8fbfc;
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar {
+    background-color: #f8fbfc;
+    border-right: 1px solid #e7f0f3;
+    min-height: 100vh;
+}
+
+.sidebar .nav-link {
+    color: #0d181b;
+    font-weight: 500;
+}
+
+.sidebar .nav-link.active {
+    background-color: #e7f0f3;
+    border-radius: 8px;
+}
+
+.card-custom {
+    background-color: #e7f0f3;
+    border: none;
+}
+
+p {
+    font-size: 8pt !important;
+}

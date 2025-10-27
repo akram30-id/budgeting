@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TreasuryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::get('/register', [App\Http\Controllers\UserController::class, 'register']
 Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
 
 Route::post('/save-token', [App\Http\Controllers\UserController::class, 'saveTokenToSession'])->name('save.token');
+
+Route::get('/treasury/cash', [TreasuryController::class, 'cash'])->middleware('global.auth');
