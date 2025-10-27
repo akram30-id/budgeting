@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped-columns table-bordered table-hover fs-6">
+                <table class="table table-bordered fs-6">
                     <thead class="table-dark text-center">
                         <th>Treasury No.</th>
                         <th>Month</th>
