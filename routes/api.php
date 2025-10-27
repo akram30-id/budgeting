@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\ProjectController;
+use App\Http\Controllers\api\TreasuryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/list-projects', [ProjectController::class, 'getListProject']);
+
+    Route::get('/list-treasury', [TreasuryController::class, 'getListCash']);
 });

@@ -16,12 +16,17 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
 </head>
 
 <body>
-    <div id="url" data-api_logout="{{ $api_logout ?? '' }}" data-url_logout="{{ $url_logout ?? '' }}"></div>
+    <div id="url"
+        data-api_logout="{{ config('services.app_url') . '/api/logout' }}"
+        data-url_logout="{{ config('services.app_url') . '/logout' }}"
+    ></div>
+
     <div id="token" data-access_token="{{ $api_token ?? '' }}"></div>
+
     <div id="module" data-module_name="{{ $module ?? '' }}"></div>
 
     <div class="container-fluid">

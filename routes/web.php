@@ -23,4 +23,7 @@ Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->n
 
 Route::post('/save-token', [App\Http\Controllers\UserController::class, 'saveTokenToSession'])->name('save.token');
 
-Route::get('/treasury/cash', [TreasuryController::class, 'cash'])->middleware('global.auth');
+Route::prefix('treasury')->group(function () {
+    Route::get('/', [TreasuryController::class, 'index'])->middleware('global.auth');
+    Route::get('/cash', [TreasuryController::class, 'cash'])->middleware('global.auth');
+});

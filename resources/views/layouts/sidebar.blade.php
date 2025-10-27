@@ -13,7 +13,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" data-module_name="treasuries" class="nav-link d-flex align-items-center gap-2">
+            <a href="/treasury" data-module_name="treasuries" class="nav-link d-flex align-items-center gap-2">
                 <i class="bi bi-bank"></i> Treasuries
             </a>
         </li>
