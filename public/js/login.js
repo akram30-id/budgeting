@@ -14,6 +14,8 @@ form.on("submit", function (e) {
         return;
     }
 
+    $("#btn-sign-in").text("Loading...");
+
     submitLoginForm(email, password);
 });
 
@@ -27,12 +29,14 @@ const submitLoginForm = (email, password) => {
         dataType: "json",
         success: function (response) {
             if (response && response.success && response.token) {
+                $("#btn-sign-in").text("Sign In");
                 handleLoginSuccess(response.token);
             } else {
                 alertComponent.alertFailed(response.message || "Login gagal. Silakan coba lagi.");
             }
         },
         error: function (xhr, status, error) {
+            $("#btn-sign-in").text("Sign In");
             const errorResponse = JSON.parse(xhr.responseText);
 
             alertComponent.alertFailed(errorResponse.message || "Login gagal. Silakan coba lagi.");
@@ -42,7 +46,7 @@ const submitLoginForm = (email, password) => {
 
 const handleLoginSuccess = (token) => {
     const url = $("#url").data("save_token");
-    
+
     $.ajax({
         type: "POST",
         url: url,
