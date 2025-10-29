@@ -34,4 +34,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/list-projects', [ProjectController::class, 'getListProject']);
 
     Route::get('/list-treasury', [TreasuryController::class, 'getListCash']);
+    Route::post('/delete-treasury', [TreasuryController::class, 'deleteCash']);
 });

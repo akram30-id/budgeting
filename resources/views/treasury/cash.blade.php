@@ -75,3 +75,8 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="module" src="{{ asset('js/pages/treasuries/delete.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/mainTable.js') }}"></script>
+@endsection
