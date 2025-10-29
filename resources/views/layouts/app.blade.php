@@ -50,4 +50,6 @@
     @include('layouts.scripts')
 </body>
 
+@yield('modals')
+
 </html>

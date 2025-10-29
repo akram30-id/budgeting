@@ -7,15 +7,15 @@ const loadTable = (data) => {
     data.forEach(element => {
         table.append(`
         <tr class="text-center">
-            <td>${element.treasury_no}</td>
+            <td><a class="text-decoration-none text-money fw-bold" href="/treasuries/detail?treasury=${element.treasury_no}">${element.treasury_no}</a></td>
             <td>${new Date(element.month).toLocaleString('default', { month: 'long' })}</td>
             <td>${element.year}</td>
-            <td><a class="text-decoration-none fw-bold" href="/treasuries/detail?treasury=${element.treasury_no}">${element.total_records}</a></td>
-            <td><a class="text-decoration-none fw-bold" href="/treasuries/member?treasury=${element.treasury_no}">${element.total_members}</a></td>
+            <td><a class="text-decoration-none text-money fw-bold" href="/treasuries/detail?treasury=${element.treasury_no}">${element.total_records}</a></td>
+            <td><a class="text-decoration-none text-money fw-bold" href="/treasuries/member?treasury=${element.treasury_no}">${element.total_members}</a></td>
             <td>${element.owner_name}</td>
             <td>${formatDate(new Date(element.created_at))}</td>
             <td>
-                <button class="btn-delete-treasury btn btn-xs btn-outline-danger">Delete</button>
+                <button class="btn-delete-treasury btn btn-xs btn-outline-danger" data-treasury_no="${element.treasury_no}">Delete</button>
             </td>
         </tr>`)
     });

@@ -10,13 +10,9 @@ class Treasury extends Model
 {
     use HasFactory;
 
-
-    static function getListTreasuries($userId, $page = 1, $limit = 15)
+    static function getListTreasuries($userId, $page = 1, $limit = 15, $search = "")
     {
-        $offset = 0;
-        if ($page > 1) {
-            $offset = $page * $limit;
-        }
+        $offset = ($page - 1) * $limit;
 
         $data = DB::table('treasuries')
             ->select([
@@ -37,7 +33,7 @@ class Treasury extends Model
                 DB::raw('(
                 SELECT name
                 FROM users
-                WHERE users.id=treasuries.owner_id
+                WHERE users.id = treasuries.owner_id
             ) AS owner_name'),
                 'treasuries.owner_id',
             ])
@@ -54,11 +50,43 @@ class Treasury extends Model
                                     ->where('treasury_members.state', 1);
                             });
                     });
-            })
-            ->orderBy('treasuries.id', 'desc')
+            });
+
+        // ✅ Search filter
+        if (!empty($search)) {
+            $data->where('treasuries.treasury_no', 'like', '%' . $search . '%');
+        }
+
+        // ✅ Pagination and order
+        $data = $data->orderBy('treasuries.id', 'desc')
             ->limit($limit)
             ->offset($offset)
             ->get();
+
+        return $data;
+    }
+
+    static function deleteTreasury($treasuryNo)
+    {
+        DB::table('treasuries')
+            ->where('treasuries.treasury_no', $treasuryNo)
+            ->update(['state' => 0, 'updated_at' => date('Y-m-d H:i:s')]);
+    }
+
+    static function getTreasuryByNo($treasuryNo, $ownerId)
+    {
+        $data = DB::table('treasuries')
+            ->select([
+                'treasuries.treasury_no',
+                'treasuries.month',
+                'treasuries.year',
+                'treasuries.created_at',
+            ])
+            ->where('treasuries.state', 1)
+            ->where('treasuries.owner_id', $ownerId)
+            ->where('treasuries.treasury_no', $treasuryNo)
+            ->orderBy('treasuries.id', 'desc')
+            ->first();
 
         return $data;
     }
