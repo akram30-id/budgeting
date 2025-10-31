@@ -25,5 +25,5 @@ Route::post('/save-token', [App\Http\Controllers\UserController::class, 'saveTok
 
 Route::prefix('treasury')->group(function () {
     Route::get('/', [TreasuryController::class, 'index'])->middleware('global.auth');
-    Route::get('/cash', [TreasuryController::class, 'cash'])->middleware('global.auth');
+    Route::get('/detail', [TreasuryController::class, 'detail'])->middleware('global.auth');
 });

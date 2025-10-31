@@ -20,10 +20,12 @@ class TreasuryController extends Controller
         return view('treasury.index', $data);
     }
 
-    public function cash()
+    public function detail()
     {
 
         $currentYear = date('Y');
+
+        $treasuryNo = request()->query('treasury');
 
         $years = [];
 
@@ -35,7 +37,10 @@ class TreasuryController extends Controller
             'title' => 'Finance Hub - Treasury Cash',
             'pageTitle' => 'Treasury',
             'years' => $years,
-            'module' => 'treasuries'
+            'module' => 'treasuries',
+            'treasuryNo' => $treasuryNo,
+            'apiGetDetailTreasury' => config('services.app_url') . '/api/list-treasury-detail',
+            'apiUpdateCheckedTreasuryDetail' => config('services.app_url') . '/api/update-checked-treasury-detail'
         ];
 
         return view('treasury.cash', $data);

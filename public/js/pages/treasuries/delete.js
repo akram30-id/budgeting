@@ -1,3 +1,4 @@
+import toastComponent from "../../components/toast-component.js";
 import { loadListTreasury } from "./index.js";
 
 // event delegation — bekerja untuk elemen yang ditambahkan dinamis
@@ -37,7 +38,6 @@ const deleteTreasury = (treasuryNo) => {
         data: { treasury_no: treasuryNo },
         success: function (response) {
             if (response.success) {
-                loadListTreasury();
                 toast(response.data || 'Treasury delete successfully', 'text-bg-success');
             } else {
                 toast(response.message || 'Treasury delete failed', 'text-bg-danger');
@@ -48,7 +48,7 @@ const deleteTreasury = (treasuryNo) => {
             toast(responseError.message || 'Treasury delete failed', 'text-bg-danger');
         },
         complete: function () {
-            $('#modalDelete').modal('hide');
+            loadListTreasury();
         }
     });
 }

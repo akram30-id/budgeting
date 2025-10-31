@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="mb-4">Cash Records</h3>
+    <div id="url-api" data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}" data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}"></div>
+    <div id="treasury-no" data-treasury_no="{{ $treasuryNo }}"></div>
+    <div class="mb-4">
+        <h3>Cash Detail</h3>
+        <span class="badge text-bg-dark text-white">#{{ $treasuryNo }}</span>
+    </div>
     <div class="row mt-5">
         <div class="col-sm-3">
             <div class="mb-3">
@@ -38,11 +43,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control form-control-sm"
-                            placeholder="search detail, expense, or income here..."
-                            aria-label="search detail, expense, or income here..." aria-describedby="button-addon2">
+                            placeholder="search here..."
+                            aria-label="search here..." aria-describedby="button-addon2">
                         <button class="btn btn-dark" type="button" id="button-addon2">Search</button>
                     </div>
                 </div>
@@ -50,6 +55,7 @@
             <div class="table-responsive">
                 <table class="table table-striped-columns table-bordered table-hover fs-6">
                     <thead class="table-dark">
+                        <th>Detail No.</th>
                         <th>Detail</th>
                         <th>Month</th>
                         <th>Income</th>
@@ -59,15 +65,9 @@
                         <th>Act Balance</th>
                         <th>###</th>
                     </thead>
-                    <tbody id="tbody-treasury-cash">
+                    <tbody id="tbody-treasury-detail">
                         <tr>
-                            <td>asasdsa</td>
-                            <td>adsasd</td>
-                            <td>100000</td>
-                            <td>sacsacs</td>
-                            <td>scasacs</td>
-                            <td>cacasasc</td>
-                            <td>sdadsdwjj</td>
+                            <td colspan="9">Loading . . .</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,6 +77,7 @@
 @endsection
 
 @section('scripts')
-    <script type="module" src="{{ asset('js/pages/treasuries/delete.js') }}"></script>
-    <script type="module" src="{{ asset('js/pages/treasuries/mainTable.js') }}"></script>
+    {{-- <script type="module" src="{{ asset('js/pages/treasuries/delete.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/mainTable.js') }}"></script> --}}
+    <script type="module" src="{{ asset('js/pages/treasuries/cash.js') }}"></script>
 @endsection
