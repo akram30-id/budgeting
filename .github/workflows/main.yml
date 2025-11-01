@@ -22,7 +22,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          ssh -i ~/.ssh/hykee_key -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
             cd /var/www/html/budgeting
             git fetch origin master
             git reset --hard origin/master
@@ -36,5 +36,3 @@ jobs:
             php artisan config:cache
             php artisan route:cache
           EOF
-
-
