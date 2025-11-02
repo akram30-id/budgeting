@@ -99,7 +99,8 @@ const fetchTreasuryDetail = (page, length, keywords) => {
                     const detailNo = $(this).data("treasury_detail_no");
                     const found = response.data.find(d => d.treasury_detail_no === detailNo);
                     if (found) {
-                        $(this).text(found.actual_value);
+                        $(this).text(`${Number(found.actual_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`)
+                        // $(this).text(found.actual_value);
                     }
                 });
             } else {
