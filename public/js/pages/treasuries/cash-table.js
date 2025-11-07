@@ -4,12 +4,15 @@ const loadTable = (data) => {
     table.html("");
 
     if (data.length > 0) {
+
         data.forEach(element => {
             table.append(`
             <tr>
                 <td>${element.treasury_detail_no}</td>
                 <td>${element.treasury_detail_name}</td>
-                <td>${new Date(element.month).toLocaleString('default', { month: 'long' })}</td>
+                <td>
+                    ${new Date(element.month).toLocaleString('default', { month: 'long' })} ${element.year}
+                </td>
                 <td>${Number(element.income_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td>${Number(element.expense_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td class="text-center align-middle">

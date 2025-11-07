@@ -5,6 +5,8 @@ namespace App\Models\api;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use stdClass;
+use function GuzzleHttp\json_encode;
 
 class Treasury extends Model
 {
@@ -81,6 +83,7 @@ class Treasury extends Model
                 'treasuries.month',
                 'treasuries.year',
                 'treasuries.created_at',
+                'treasuries.owner_id',
             ])
             ->where(function ($query) use ($userId) {
                 $query->where('treasuries.owner_id', $userId)
@@ -112,15 +115,11 @@ class Treasury extends Model
 
         $data = DB::table('treasury_detail')
             ->join('treasuries', 'treasuries.treasury_no', '=', 'treasury_detail.treasury_no')
-            ->join('treasury_actual_balances', 'treasury_actual_balances.treasury_detail_no', '=', 'treasury_detail.treasury_detail_no')
-            ->join('treasury_estimate_balances', 'treasury_estimate_balances.treasury_detail_no', '=', 'treasury_detail.treasury_detail_no')
             ->select([
                 'treasury_detail.*',
                 'treasuries.treasury_no',
                 'treasuries.month',
                 'treasuries.year',
-                'treasury_actual_balances.actual_value',
-                'treasury_estimate_balances.estimate_value',
             ])
             ->where('treasury_detail.state', 1)
             ->where('treasury_detail.treasury_no', $treasuryNo);
@@ -142,14 +141,10 @@ class Treasury extends Model
 
         $treasuryDetail = DB::table('treasury_detail')
             ->join('treasuries', 'treasuries.treasury_no', '=', 'treasury_detail.treasury_no')
-            ->join('treasury_estimate_balances', 'treasury_estimate_balances.treasury_detail_no', '=', 'treasury_detail.treasury_detail_no')
-            ->join('treasury_actual_balances', 'treasury_actual_balances.treasury_detail_no', '=', 'treasury_detail.treasury_detail_no')
             ->select([
                 'treasury_detail.*',
                 'treasuries.treasury_no',
                 'treasuries.owner_id',
-                'treasury_estimate_balances.estimate_value',
-                'treasury_actual_balances.actual_value',
             ])
             ->where('treasury_detail.treasury_detail_no', $treasuryDetailNo)
             ->where('treasury_detail.state', 1)
@@ -181,7 +176,6 @@ class Treasury extends Model
 
             DB::commit();
             return ['error' => false, 'message' => 'Update successful'];
-
         } catch (\Throwable $th) {
             DB::rollBack();
             return [
@@ -192,6 +186,76 @@ class Treasury extends Model
                     'message' => $th->getMessage()
                 ])
             ];
+        }
+    }
+
+    static function createCash(String $treasuryNo, stdClass $data, $userId)
+    {
+
+        try {
+
+            $treasury = self::getTreasuryByNo($treasuryNo, $userId);
+
+            // NOT TREASURY OWNER
+            if ($treasury && $treasury->owner_id !== $userId) {
+
+                // CHECK IS MEMBER HAVE EDIT ACCESS
+                $member = DB::table('treasury_members')
+                    ->select('can_edit')
+                    ->where('member_id', $userId)
+                    ->first();
+
+                if ($member && $member->can_edit != 1) {
+                    return [
+                        'error'     => true,
+                        'message'   => 'Member have no access to edit this treasury',
+                        'code'      => 401
+                    ];
+                }
+            }
+
+            DB::beginTransaction();
+
+            $saveWithLastId = DB::table('treasury_detail')
+                ->insertGetId([
+                    'treasury_no'           => $treasuryNo,
+                    'treasury_detail_name'  => $data->detail,
+                    'notes'                 => $data->notes,
+                    'income_value'          => $data->income,
+                    'expense_value'         => $data->expense,
+                    'is_debt'               => $data->is_debt,
+                    'user_id'               => $userId,
+                    'created_at'            => date('Y-m-d H:i:s'),
+                    'updated_at'            => date('Y-m-d H:i:s'),
+                ]);
+
+            if ($saveWithLastId) {
+
+                $treasuryDetailNo = "TRD" .  str_pad($saveWithLastId, 10, "0", STR_PAD_LEFT);
+
+                $updateCashDetail = DB::table('treasury_detail')
+                    ->where(['id' => $saveWithLastId])
+                    ->update(['treasury_detail_no' => $treasuryDetailNo]);
+
+                if ($updateCashDetail) {
+                    DB::commit();
+
+                    return ['error' => false];
+                } else {
+                    DB::rollBack();
+
+                    return ['error' => true, 'message' => 'Failed to save created cash (TREASURY_DETAIL_NO_FAILED)', 'code' => 500];
+                }
+            } else {
+                DB::rollBack();
+
+                return ['error' => true, 'message' => 'Failed to save created cash (TREASURY_DETAIL_SAVE_FAILURE)', 'code' => 500];
+            }
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+
+            return ['error' => true, 'message' => json_encode(['message' => $th->getMessage(), 'file' => $th->getFile(), 'line' => $th->getLine()]), 'code' => '500F0'];
         }
     }
 }
