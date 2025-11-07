@@ -34,13 +34,14 @@ class TreasuryController extends Controller
         }
 
         $data = [
-            'title' => 'Finance Hub - Treasury Cash',
-            'pageTitle' => 'Treasury',
-            'years' => $years,
-            'module' => 'treasuries',
-            'treasuryNo' => $treasuryNo,
-            'apiGetDetailTreasury' => config('services.app_url') . '/api/list-treasury-detail',
-            'apiUpdateCheckedTreasuryDetail' => config('services.app_url') . '/api/update-checked-treasury-detail'
+            'title'                             => 'Finance Hub - Treasury Cash',
+            'pageTitle'                         => 'Treasury',
+            'years'                             => $years,
+            'module'                            => 'treasuries',
+            'treasuryNo'                        => $treasuryNo,
+            'apiGetDetailTreasury'              => config('services.app_url') . '/api/list-treasury-detail',
+            'apiUpdateCheckedTreasuryDetail'    => config('services.app_url') . '/api/update-checked-treasury-detail',
+            'apiCreateCash'                     => config('services.app_url') . '/api/create-new-cash'
         ];
 
         return view('treasury.cash', $data);

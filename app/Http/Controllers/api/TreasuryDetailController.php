@@ -54,6 +54,7 @@ class TreasuryDetailController extends Controller
                 $detail->treasury_detail_no = $valDetail->treasury_detail_no;
                 $detail->treasury_detail_name = $valDetail->treasury_detail_name;
                 $detail->month = $valDetail->month;
+                $detail->year = $valDetail->year;
                 $detail->income_value = $valDetail->income_value;
                 $detail->expense_value = $valDetail->expense_value;
                 $detail->is_checked = $valDetail->is_checked;
@@ -77,10 +78,12 @@ class TreasuryDetailController extends Controller
             }
 
             return response()->json([
-                'success' => true,
-                'page' => $page,
-                'length' => $length,
-                'data' => $data
+                'success'   => true,
+                'page'      => $page,
+                'length'    => $length,
+                'month'     => $listDetail[0]->month,
+                'year'      => $listDetail[0]->year,
+                'data'      => $data
             ], 200);
         } catch (\Throwable $th) {
 
@@ -192,6 +195,73 @@ class TreasuryDetailController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Something went wrong.'
+            ], 500);
+        }
+    }
+
+    public function createTreasuryDetail(Request $request)
+    {
+
+        $validate = Validator::make($request->all(), [
+            'detail' => 'required|max:100',
+            'notes' => 'max:200'
+        ], [
+            'detail.required' => 'Detail cash is required',
+            'notes.max' => 'Notes can not be more than 200 characters',
+            'detail.max' => 'Detail can not be more than 100 characters'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validate->errors()->first()
+            ], 422);
+        }
+
+        try {
+            $user = Auth::user();
+
+            $data = [
+                'detail'                => $request->detail,
+                'notes'                 => $request->notes ?? null,
+                'income'                => $request->income ?? 0,
+                'expense'               => $request->expense ?? 0,
+                'is_debt'               => $request->is_debt ?? 0,
+                'user_id'               => $user->id,
+                'created_at'            => date('Y-m-d H:i:s'),
+                'updated_at'            => date('Y-m-d H:i:s'),
+            ];
+
+            $dataObject = json_decode(json_encode($data));
+
+            $createNewCash = Treasury::createCash($request->treasury_no, $dataObject, $user->id);
+
+            if ($createNewCash['error'] && $createNewCash['code'] == '500F0') {
+                throw new \Exception($createNewCash['message']);
+            }
+
+            if ($createNewCash['error']) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $createNewCash['message']
+                ], $createNewCash['code'] ?? 500);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully created new cash'
+            ], 200);
+        } catch (\Throwable $th) {
+
+            Log::error(json_encode([
+                'file'      => $th->getFile(),
+                'line'      => $th->getLine(),
+                'message'   => $th->getMessage()
+            ]));
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to save created cash (GENERAL_ERROR).'
             ], 500);
         }
     }

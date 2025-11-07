@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 });
 
-const loadListDetailTreasury = (page = 1, length = 15, keywords = "",) => {
+export const loadListDetailTreasury = (page = 1, length = 15, keywords = "",) => {
     const url = $("#url-api").data("api_get_detail_treasury");
     const token = $("#token").data("access_token");
 
@@ -25,6 +25,10 @@ const loadListDetailTreasury = (page = 1, length = 15, keywords = "",) => {
         dataType: "json",
         success: function (response) {
             if (response.success) {
+
+
+                $("#periode").text(`${new Date(response.month).toLocaleString('default', { month: 'long' })} ${response.year}`);
+
                 cashTable.loadTable(response.data);
 
                 if (response.data.length === 0) {
@@ -100,7 +104,6 @@ const fetchTreasuryDetail = (page, length, keywords) => {
                     const found = response.data.find(d => d.treasury_detail_no === detailNo);
                     if (found) {
                         $(this).text(`${Number(found.actual_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`)
-                        // $(this).text(found.actual_value);
                     }
                 });
             } else {

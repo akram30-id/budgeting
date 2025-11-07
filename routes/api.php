@@ -38,4 +38,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/list-treasury-detail', [TreasuryDetailController::class, 'getListDetail']);
     Route::post('/delete-treasury', [TreasuryController::class, 'deleteCash']);
     Route::post('/update-checked-treasury-detail', [TreasuryDetailController::class, 'updateTreasuryDetail']);
+    Route::post('/create-new-cash', [TreasuryDetailController::class, 'createTreasuryDetail']);
 });
