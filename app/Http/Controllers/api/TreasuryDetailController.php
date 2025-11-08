@@ -265,4 +265,84 @@ class TreasuryDetailController extends Controller
             ], 500);
         }
     }
+
+    public function deleteCash(Request $request)
+    {
+
+        try {
+
+            $treasuryDetailNo = $request->treasury_detail_no ?? null;
+
+            if ($treasuryDetailNo === null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Treasury detail is required'
+                ], 422);
+            }
+
+            $user = Auth::user();
+            $userId = $user->id;
+
+            $treasuryDetail = DB::table('treasury_detail AS a')
+            ->join('treasuries AS b', 'a.treasury_no', '=', 'b.treasury_no')
+                ->select([
+                    'b.treasury_no',
+                    'b.owner_id'
+                ])
+                ->where('a.treasury_detail_no', $treasuryDetailNo)->first();
+
+            if (!$treasuryDetail) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cash not found.'
+                ], 404);
+            }
+
+            if ($treasuryDetail->owner_id !== $userId) {
+                $treasuryMember = DB::table('treasury_members')
+                    ->select([
+                        'member_id'
+                    ])
+                    ->where('treasury_no', $treasuryDetail->treasury_no)
+                    ->where('state', 1)
+                    ->where('can_edit', 1)
+                    ->where('member_id', $userId)
+                    ->first();
+
+                if (!$treasuryMember) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'You are not allowed to do this action.'
+                    ], 401);
+                }
+            }
+
+            $delete = Treasury::deleteCash($treasuryDetailNo);
+
+            if (isset($delete['error']) && $delete['error'] == true) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $delete['message']
+                ], $delete['code'] ?? 500);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully deleted'
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            Log::error(json_encode([
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+                'message' => $th->getMessage()
+            ]));
+
+            return response()->json([
+                'success' => false,
+                'error' => 'Something went wrong'
+            ], 500);
+        }
+    }
 }

@@ -258,4 +258,29 @@ class Treasury extends Model
             return ['error' => true, 'message' => json_encode(['message' => $th->getMessage(), 'file' => $th->getFile(), 'line' => $th->getLine()]), 'code' => '500F0'];
         }
     }
+
+    static function deleteCash(String $treasuryDetailNo)
+    {
+
+        $delete = DB::table('treasury_detail')
+            ->where('treasury_detail_no', $treasuryDetailNo)
+            ->update([
+                'state' => 0
+            ]);
+
+        if (!$delete) {
+            return [
+                'error' => true,
+                'message' => 'Failed to delete cash',
+                'code' => 500
+            ];
+        }
+
+        return [
+            'error' => false,
+            'message' => 'Successfully deleted',
+            'code' => 200
+        ];
+
+    }
 }

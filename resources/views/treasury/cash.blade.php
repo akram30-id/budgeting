@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="url-api"
-        data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
+    <div id="url-api" data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
         data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}"
-        data-api_create_cash="{{ $apiCreateCash }}"></div>
+        data-api_create_cash="{{ $apiCreateCash }}"
+        data-api_delete_cash="{{ $apiDeleteCash }}"></div>
     <div id="treasury-no" data-treasury_no="{{ $treasuryNo }}"></div>
     <div class="mb-4">
         <h3>Cash Detail</h3>
@@ -87,11 +87,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="input-income-amount" class="form-label fs-6">Income Amount</label>
-                            <input type="text" class="form-control form-control-sm" id="input-income-amount" placeholder="0">
+                            <input type="text" class="form-control form-control-sm" id="input-income-amount"
+                                placeholder="0">
                         </div>
                         <div class="mb-3">
                             <label for="input-expense-amount" class="form-label fs-6">Expense Amount</label>
-                            <input type="text" class="form-control form-control-sm" id="input-expense-amount" placeholder="0">
+                            <input type="text" class="form-control form-control-sm" id="input-expense-amount"
+                                placeholder="0">
                         </div>
                         <div class="mb-3">
                             <label for="input-notes" class="form-label fs-6">Notes</label>
@@ -125,9 +127,41 @@
             </div>
         </div>
     </div>
+
+
+    {{-- MODAL DELETE --}}
+    <div class="modal fade" id="modalDeleteCash" tabindex="-1" aria-labelledby="modalDeleteCashLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeleteCashLabel">Delete Treasury</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-5">
+                        <div class="col-sm-12">
+                            <h5>Are you sure you want to delete this cash?</h5>
+                            <h5 class="text-danger"><span id="cash-detail-delete"></span></h5>
+                            <input type="hidden" id="cash-no-delete">
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end px-3">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-danger" id="btn-delete-cash">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
     <script type="module" src="{{ asset('js/pages/treasuries/cash.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-add.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/cash-delete.js') }}"></script>
 @endsection
