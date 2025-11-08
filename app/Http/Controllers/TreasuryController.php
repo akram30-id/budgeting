@@ -41,7 +41,8 @@ class TreasuryController extends Controller
             'treasuryNo'                        => $treasuryNo,
             'apiGetDetailTreasury'              => config('services.app_url') . '/api/list-treasury-detail',
             'apiUpdateCheckedTreasuryDetail'    => config('services.app_url') . '/api/update-checked-treasury-detail',
-            'apiCreateCash'                     => config('services.app_url') . '/api/create-new-cash'
+            'apiCreateCash'                     => config('services.app_url') . '/api/create-new-cash',
+            'apiDeleteCash'                     => config('services.app_url') . '/api/delete-cash'
         ];
 
         return view('treasury.cash', $data);
