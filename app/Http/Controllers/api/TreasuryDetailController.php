@@ -34,6 +34,18 @@ class TreasuryDetailController extends Controller
                 ], 400);
             }
 
+            $treasuries = DB::table('treasuries')
+                ->select()
+                ->where('treasury_no', $treasuryNo)
+                ->first();
+
+            if (!$treasuries) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No data found.'
+                ], 404);
+            }
+
             $listDetail = Treasury::getTreasuryDetailByNo($treasuryNo, $user->id, $page, $length, $keywords);
 
             if (!$listDetail) {
@@ -81,8 +93,8 @@ class TreasuryDetailController extends Controller
                 'success'   => true,
                 'page'      => $page,
                 'length'    => $length,
-                'month'     => $listDetail[0]->month,
-                'year'      => $listDetail[0]->year,
+                'month'     => $treasuries->month,
+                'year'      => $treasuries->year,
                 'data'      => $data
             ], 200);
         } catch (\Throwable $th) {

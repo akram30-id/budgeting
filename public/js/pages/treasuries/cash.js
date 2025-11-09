@@ -31,6 +31,8 @@ export const loadListDetailTreasury = (page = 1, length = 15, keywords = "",) =>
 
                 cashTable.loadTable(response.data);
 
+                console.info(response.data.length);
+
                 if (response.data.length === 0) {
                     cashTable.loadTableFailed("No data found.");
                 }

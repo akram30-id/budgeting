@@ -34,10 +34,10 @@ const loadTable = (data) => {
 }
 
 const loadTableFailed = (message) => {
-    const table = $("#tbody-treasury-cash");
+    const table = $("#tbody-treasury-detail");
     table.html(`
     <tr>
-        <td colspan="7" class="text-center">${message}</td>
+        <td colspan="9" class="text-center">${message}</td>
     </tr>
     `);
 }
