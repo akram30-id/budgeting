@@ -2,9 +2,8 @@
 
 @section('content')
     <div id="url-api" data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
-        data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}"
-        data-api_create_cash="{{ $apiCreateCash }}"
-        data-api_delete_cash="{{ $apiDeleteCash }}"></div>
+        data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}" data-api_create_cash="{{ $apiCreateCash }}"
+        data-api_delete_cash="{{ $apiDeleteCash }}" data-api_detail_cash="{{ $apiDetailCash }}"></div>
     <div id="treasury-no" data-treasury_no="{{ $treasuryNo }}"></div>
     <div class="mb-4">
         <h3>Cash Detail</h3>
@@ -22,7 +21,7 @@
                     <div class="mb-3">
                         <div class="d-flex align-items-center justify-content-start">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
+                            <button type="button" id="btn-add-cash" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
                                 data-bs-target="#addCashModal">
                                 Add Cash
                             </button>
@@ -74,11 +73,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
+                    <!-- loader container -->
+                    <div id="loader-cash" style="display:none; text-align:center; margin-top:10px;">
+                        <img src="{{ asset('assets/img/loading.gif') }}" alt="Loading..." width="32">
+                    </div>
+
                     <form action="#" id="form-add-cash">
                         <div class="mb-3">
                             <label for="input-cash-treasury-no" class="form-label fs-6">Treasury No</label>
-                            <input type="text" disabled class="form-control form-control-sm" id="input-cash-treasury-no"
-                                placeholder="{{ $treasuryNo }}">
+                            <input type="text" disabled class="form-control form-control-sm" id="input-cash-treasury-no" placeholder="{{ $treasuryNo }}">
+                            <input type="hidden" disabled class="form-control form-control-sm" id="input-treasury-detail-no">
                         </div>
                         <div class="mb-3">
                             <label for="input-cash-detail" class="form-label fs-6">Detail</label>
@@ -122,7 +127,8 @@
                 <div class="modal-footer">
                     <button type="button" form="form-add-cash" class="btn btn-secondary"
                         data-bs-dismiss="modal">Close</button>
-                    <button type="submit" form="form-add-cash" class="btn btn-dark">Save</button>
+                    <button type="submit" form="form-add-cash" id="btn-save-cash" class="btn btn-dark">Save</button>
+                    <button type="button" form="form-add-cash" id="btn-save-updated-cash" style="display: none;" class="btn btn-dark">Update</button>
                 </div>
             </div>
         </div>
@@ -130,7 +136,8 @@
 
 
     {{-- MODAL DELETE --}}
-    <div class="modal fade" id="modalDeleteCash" tabindex="-1" aria-labelledby="modalDeleteCashLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDeleteCash" tabindex="-1" aria-labelledby="modalDeleteCashLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -164,4 +171,5 @@
     <script type="module" src="{{ asset('js/pages/treasuries/cash.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-add.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-delete.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/cash-update.js') }}"></script>
 @endsection

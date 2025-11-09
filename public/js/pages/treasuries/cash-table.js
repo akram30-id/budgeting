@@ -21,7 +21,7 @@ const loadTable = (data) => {
                 <td>${Number(element.estimate_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td class="actual-value-cell" data-treasury_detail_no="${element.treasury_detail_no}">${Number(element.actual_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td>
-                    <button class="btn btn-sm btn-outline-primary mb-2">Edit</button>
+                    <button class="btn btn-sm btn-outline-primary mb-2 btn-update-cash" data-treasury_detail_no="${element.treasury_detail_no}">Edit</button>
                     <button class="btn btn-sm btn-outline-danger mb-2 btn-delete-cash" data-treasury_detail_no="${element.treasury_detail_no}" data-cash_detail="${element.treasury_detail_name}">Delete</button>
                 </td>
             </tr>
