@@ -112,4 +112,73 @@ class TreasuryController extends Controller
             ], 500);
         }
     }
+
+    public function addCash(Request $request)
+    {
+
+        $validate = Validator::make($request->all(), [
+            'month' => 'required',
+            'year'  => 'required'
+        ], [
+            'month.required'    => 'Month is required',
+            'year.required'     => 'Year is required'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validate->errors()->first()
+            ], 400);
+        }
+
+        $user = Auth::user();
+
+        try {
+            DB::beginTransaction();
+
+            $createWithLastId = DB::table('treasuries')
+                ->insertGetId([
+                    'month'     => $request->month,
+                    'year'      => $request->year,
+                    'owner_id'  => $user->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
+            if ($createWithLastId) {
+                $treasuryNo = "TRE" . str_pad($createWithLastId, 10, "0", STR_PAD_LEFT);
+
+                $updateTreasury = DB::table('treasuries')
+                    ->where('id', $createWithLastId)
+                    ->update([
+                        'treasury_no' => $treasuryNo
+                    ]);
+
+                if ($updateTreasury) {
+                    DB::commit();
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Successfully created ' . $treasuryNo
+                    ], 200);
+                } else {
+                    DB::rollBack();
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Failed to create new treasury'
+                    ], 422);
+                }
+            }
+        } catch (\Throwable $th) {
+            $this->logError($th);
+
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong'
+            ], 500);
+        }
+    }
 }
