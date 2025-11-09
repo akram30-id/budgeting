@@ -2,6 +2,19 @@ import { loadListDetailTreasury } from "./cash.js";
 import cashTable from "./cash-table.js";
 
 $(document).ready(function () {
+
+    $("#btn-add-cash").on("click", function () {
+
+        $("#form-add-cash")[0].reset();
+
+        $("#form-add-cash").find("input[type=text], input[type=number], textarea").val("");
+
+        $("#btn-save-cash").show();
+
+        $("#btn-save-updated-cash").hide();
+
+    });
+
     $("#input-income-amount").on("input", function () {
         formatCurrencyInput($(this));
     });

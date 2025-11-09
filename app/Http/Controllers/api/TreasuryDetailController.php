@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use stdClass;
-use GrahamCampbell\ResultType\Error;
+use App\Models\TreasuryMember;
 
 class TreasuryDetailController extends Controller
 {
@@ -165,6 +165,9 @@ class TreasuryDetailController extends Controller
             if ($request->has('notes'))
                 $updateData['notes'] = $request->notes;
 
+            if ($request->has('treasury_detail_name'))
+                $updateData['treasury_detail_name'] = $request->treasury_detail_name;
+
             if (empty($updateData)) {
                 return response()->json([
                     'success' => false,
@@ -284,7 +287,7 @@ class TreasuryDetailController extends Controller
             $userId = $user->id;
 
             $treasuryDetail = DB::table('treasury_detail AS a')
-            ->join('treasuries AS b', 'a.treasury_no', '=', 'b.treasury_no')
+                ->join('treasuries AS b', 'a.treasury_no', '=', 'b.treasury_no')
                 ->select([
                     'b.treasury_no',
                     'b.owner_id'
@@ -330,7 +333,6 @@ class TreasuryDetailController extends Controller
                 'success' => true,
                 'message' => 'Successfully deleted'
             ], 200);
-
         } catch (\Throwable $th) {
 
             Log::error(json_encode([
@@ -342,6 +344,96 @@ class TreasuryDetailController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function getCashDetail(Request $request)
+    {
+        try {
+            $user = Auth::user();
+
+            $treasuryDetailNo = $request->query('treasury_detail_no', null);
+
+            if (empty($treasuryDetailNo)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Can not find empty cash number.'
+                ], 400);
+            }
+
+            $treasuries = DB::table('treasuries AS a')
+                ->join('treasury_detail AS b', 'a.treasury_no', '=', 'b.treasury_no')
+                ->select([
+                    'a.owner_id',
+                    'a.treasury_no',
+                    'a.month',
+                    'a.year'
+                ])
+                ->where('b.treasury_detail_no', $treasuryDetailNo)
+                ->where('b.state', 1)
+                ->first();
+
+            if (!$treasuries) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No data found.'
+                ], 404);
+            }
+
+            if ($treasuries->owner_id != $user->id) {
+                $treasuryMember = TreasuryMember::where([
+                    'treasury_no' => $treasuries->treasury_no,
+                    'member_id' => $user->id
+                ])->first();
+
+                if (!$treasuryMember) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'You are not allowed to do this.'
+                    ], 401);
+                }
+            }
+
+            $treasuryDetail = DB::table('treasury_detail')
+                ->select([
+                    'treasury_detail_no',
+                    'treasury_no',
+                    'treasury_detail_name',
+                    'notes',
+                    'income_value',
+                    'expense_value',
+                    'is_checked',
+                    'is_debt',
+                    'user_id'
+                ])
+                ->where('treasury_detail_no', $treasuryDetailNo)
+                ->where('state', 1)
+                ->first();
+
+            if (!$treasuryDetail) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No data found.'
+                ], 404);
+            }
+
+            return response()->json([
+                'success'   => true,
+                'data'      => $treasuryDetail
+            ], 200);
+        } catch (\Throwable $th) {
+
+            Log::error(json_encode([
+                'request'   => $request->all(),
+                'file'      => $th->getFile(),
+                'line'      => $th->getLine(),
+                'message'   => $th->getMessage()
+            ]));
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong.'
             ], 500);
         }
     }
