@@ -1,5 +1,5 @@
 {{-- Sidebar (Desktop) --}}
-<nav class="col-md-3 col-lg-2 d-none d-md-block sidebar p-3">
+<nav class="col-md-3 col-lg-2 d-none d-md-block sidebar p-3 position-relative">
     <h5 class="mb-4">Finance Hub</h5>
     <ul class="nav flex-column gap-2">
         <li class="nav-item">
@@ -33,6 +33,8 @@
             </a>
         </li>
     </ul>
+
+    <img src="{{ asset('assets/img/ngupil-bubu-dudu.gif') }}" alt="Mascot" class="sidebar-gif">
 </nav>
 
 {{-- Top Navbar (Mobile) --}}
@@ -86,5 +88,7 @@
                 </a>
             </li>
         </ul>
+
+        <img src="{{ asset('assets/img/ngupil-bubu-dudu.gif') }}" alt="" class="sidebar-gif">
     </div>
 </div>
