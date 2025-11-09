@@ -21,6 +21,9 @@
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-sm-4 col-md-6 col-lg-4">
+                <img class="img-fluid mx-auto d-block" src="{{ asset('assets/img/login_bubududu.gif') }}"
+                    style="height: 128px;" alt="">
+                <p class="chewy-regular text-center">you can't keep buying snacks, bubu...</p>
                 <div id="alert-container"></div>
                 <div class="card p-3 fs-6">
                     <div class="card-body">
@@ -31,7 +34,8 @@
 
                         <form id="form-sign-in">
 
-                            <input type="hidden" id="url" data-api_login="{{ $api_login }}" data-save_token="{{ $save_token_url }}">
+                            <input type="hidden" id="url" data-api_login="{{ $api_login }}"
+                                data-save_token="{{ $save_token_url }}">
 
                             <div class="mb-3">
                                 <label for="">Email</label>
