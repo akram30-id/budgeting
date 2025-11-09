@@ -21,4 +21,15 @@ class Controller extends BaseController
             'request' => $request->all()
         ]));
     }
+
+    public function logError(\Throwable $th)
+    {
+
+        Log::error(json_encode([
+            'file' => $th->getFile() ?? null,
+            'line' => $th->getLine() ?? null,
+            'message' => $th->getMessage() ?? ''
+        ]));
+
+    }
 }

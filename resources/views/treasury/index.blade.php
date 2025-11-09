@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="url-api" data-api_list_treasure="{{ $list_treasuries_api }}"></div>
+    <div id="url-api"
+        data-api_list_treasure="{{ $list_treasuries_api }}"
+        data-api_create_treasury="{{ $api_create_treasury }}"
+    ></div>
     <div class="my-5">
         <h4 class="fw-bold mb-3">Cash Trends</h4>
         <div class="card card-custom p-4">
@@ -19,7 +22,7 @@
 
     <div class="row mt-5" id="cash-records">
         <div class="col-sm-12 mt-5">
-            <h4 class="fw-bold mb-3">Cash Records</h4>
+            <h4 class="fw-bold mb-3">My Treasuries <sup id="load-modal-cash"><i class="bi bi-plus-circle"></i></sup></h4>
             <div class="row justify-content-between">
                 <div class="col-lg-1 col-sm-2 col-3">
                     <select class="form-select" id="select-length-treasury" aria-label="Default select example">
@@ -105,6 +108,56 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="treasuryModal" tabindex="-1" aria-labelledby="treasuryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="treasuryModalLabel">Add New Treasury</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- loader container -->
+                    <div id="loader-treasury" style="display:none; text-align:center; margin-top:10px;">
+                        <img src="{{ asset('assets/img/loading.gif') }}" alt="Loading..." width="32">
+                    </div>
+
+                    <form action="#" id="form-add-treasury">
+                        <div class="mb-3">
+                            <label for="input-treasury-month" class="form-label fs-6">Month</label>
+                            <select class="form-select form-select-sm" id="input-treasury-month" aria-label="Small select example">
+                                @foreach ($months as $index => $value)
+                                    <option @if ($index == 0) {{ 'disabled' }} @endif
+                                        value="{{ $index }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-treasury-year" class="form-label fs-6">Year</label>
+                            <select class="form-select form-select-sm" id="input-treasury-year" aria-label="Small select example">
+                                <option disabled>Select Year</option>
+
+                                @foreach ($years as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" form="form-add-treasury" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="form-add-treasury" id="btn-save-treasury" class="btn btn-dark">Save</button>
+                    <button type="button" form="form-add-treasury" id="btn-save-updated-treasury" style="display: none;"
+                        class="btn btn-dark">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -114,4 +167,5 @@
     <script type="module" src="{{ asset('js/pages/treasuries/mainTable.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/delete.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/pagination.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/treasury-add.js') }}"></script>
 @endsection

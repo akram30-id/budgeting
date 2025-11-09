@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/list-projects', [ProjectController::class, 'getListProject']);
 
     Route::get('/list-treasury', [TreasuryController::class, 'getListCash']);
+    Route::post('/create-treasury', [TreasuryController::class, 'addCash']);
     Route::get('/list-treasury-detail', [TreasuryDetailController::class, 'getListDetail']);
     Route::post('/delete-treasury', [TreasuryController::class, 'deleteCash']);
     Route::post('/update-checked-treasury-detail', [TreasuryDetailController::class, 'updateTreasuryDetail']);
