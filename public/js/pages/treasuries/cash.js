@@ -47,7 +47,7 @@ export const loadListDetailTreasury = (page = 1, length = 15, keywords = "",) =>
     });
 }
 
-$(document).on("click", ".checkbox-treasury-detail", function () {
+$(document).on("click touchstart", ".checkbox-treasury-detail", function () {
 
     const treasuryDetailNo = $(this).data("treasury_detail_no");
     const isChecked = $(this).prop("checked");

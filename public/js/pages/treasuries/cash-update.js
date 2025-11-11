@@ -1,7 +1,7 @@
 import toastComponent from "../../components/toast-component.js";
 import { loadListDetailTreasury } from "./cash.js";
 
-$(document).on("click", ".btn-update-cash", function () {
+$(document).on("click touchstart", ".btn-update-cash", function () {
 
     $("#loader-cash").show();
 
@@ -68,7 +68,7 @@ $(document).on("click", ".btn-update-cash", function () {
 })
 
 
-$("#btn-save-updated-cash").on("click", function () {
+$("#btn-save-updated-cash").on("click touchstart", function () {
 
     const url = $("#url-api").data("api_update_checked");
 

@@ -13,7 +13,7 @@ $(document).ready(function () {
         loadListTreasury(1, selectedLength, keywords);
     });
 
-    $("#btn-previous-treasury").on("click", function (e) {
+    $("#btn-previous-treasury").on("click touchstart", function (e) {
         e.preventDefault();
 
         const page = parseInt($("#btn-previous-treasury").data("page")) || initialPage;
@@ -23,7 +23,7 @@ $(document).ready(function () {
         loadListTreasury(page, length, keywords);
     });
 
-    $("#btn-next-treasury").on("click", function (e) {
+    $("#btn-next-treasury").on("click touchstart", function (e) {
         e.preventDefault();
 
         const page = parseInt($("#btn-next-treasury").data("page")) || initialPage;

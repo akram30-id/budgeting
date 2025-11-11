@@ -1,6 +1,6 @@
 const triggerLogout = $(".signout");
 
-triggerLogout.on("click", function (e) {
+triggerLogout.on("click touchstart", function (e) {
     e.preventDefault();
     submitLogout();
 });
