@@ -38,7 +38,7 @@ $("#form-add-cash").on("submit", function (e) {
 
     if (isNaN(income) || income == undefined) income = null;
 
-    const expense = parseFloat($("#input-expense-amount").val().replace(/,/g, ''));
+    let expense = parseFloat($("#input-expense-amount").val().replace(/,/g, ''));
 
     if (isNaN(expense) || expense == undefined) expense = null;
 
