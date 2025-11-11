@@ -1,7 +1,7 @@
 import toastComponent from "../../components/toast-component.js";
 import { loadListDetailTreasury } from "./cash.js";
 
-$(document).on("click", ".btn-delete-cash", function (e) {
+$(document).on("click touchstart", ".btn-delete-cash", function (e) {
     e.preventDefault();
 
     const treasuryDetailNo = $(this).data("treasury_detail_no");
@@ -15,7 +15,7 @@ $(document).on("click", ".btn-delete-cash", function (e) {
     $("#modalDeleteCash").modal("show");
 });
 
-$("#btn-delete-cash").on("click", function () {
+$("#btn-delete-cash").on("click touchstart", function () {
 
     const cashNo = $("#cash-no-delete").val();
 

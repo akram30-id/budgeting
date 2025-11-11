@@ -3,7 +3,7 @@ import cashTable from "./cash-table.js";
 
 $(document).ready(function () {
 
-    $("#btn-add-cash").on("click", function () {
+    $("#btn-add-cash").on("click touchstart", function () {
 
         $("#form-add-cash")[0].reset();
 

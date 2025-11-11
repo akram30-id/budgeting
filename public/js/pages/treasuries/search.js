@@ -3,7 +3,7 @@ import { loadListTreasury } from "./index.js";
 const input = $("#input-search");
 const btnSearch = $("#btn-search");
 
-btnSearch.on("click", function (e) {
+btnSearch.on("click touchstart", function (e) {
 
     e.preventDefault();
 

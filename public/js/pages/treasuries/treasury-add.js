@@ -1,7 +1,7 @@
 import toastComponent from "../../components/toast-component.js";
 import { loadListTreasury } from "./index.js";
 
-$("#load-modal-cash").on("click", function () {
+$("#load-modal-cash").on("click touchstart", function () {
 
 
     $("#treasuryModal").modal("show");

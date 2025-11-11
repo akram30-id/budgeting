@@ -4,7 +4,7 @@ const btnPrevious = $("#btn-previous-treasury");
 const btnNext = $("#btn-next-treasury");
 let currentPage = 1;
 
-btnPrevious.on("click", function (e) {
+btnPrevious.on("click touchstart", function (e) {
     e.preventDefault();
 
     currentPage = currentPage - 1;
@@ -21,7 +21,7 @@ btnPrevious.on("click", function (e) {
 
 });
 
-btnNext.on("click", function (e) {
+btnNext.on("click touchstart", function (e) {
     e.preventDefault();
 
     currentPage = currentPage + 1;
