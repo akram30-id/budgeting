@@ -32,6 +32,8 @@ return [
 
     'app_url' => env('APP_URL', 'http://budgeting.test'),
 
+    'app_env' => env('APP_ENV', 'development'),
+
     'months_en' => ['Select Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
 ];
