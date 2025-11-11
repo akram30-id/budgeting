@@ -21,8 +21,8 @@
                     <div class="mb-3">
                         <div class="d-flex align-items-center justify-content-start">
                             <!-- Button trigger modal -->
-                            <button type="button" id="btn-add-cash" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
-                                data-bs-target="#addCashModal">
+                            <button type="button" id="btn-add-cash" class="btn btn-sm btn-outline-dark"
+                                data-bs-toggle="modal" data-bs-target="#addCashModal">
                                 Add Cash
                             </button>
 
@@ -82,8 +82,10 @@
                     <form action="#" id="form-add-cash">
                         <div class="mb-3">
                             <label for="input-cash-treasury-no" class="form-label fs-6">Treasury No</label>
-                            <input type="text" disabled class="form-control form-control-sm" id="input-cash-treasury-no" placeholder="{{ $treasuryNo }}">
-                            <input type="hidden" disabled class="form-control form-control-sm" id="input-treasury-detail-no">
+                            <input type="text" disabled class="form-control form-control-sm" id="input-cash-treasury-no"
+                                placeholder="{{ $treasuryNo }}">
+                            <input type="hidden" disabled class="form-control form-control-sm"
+                                id="input-treasury-detail-no">
                         </div>
                         <div class="mb-3">
                             <label for="input-cash-detail" class="form-label fs-6">Detail</label>
@@ -128,7 +130,8 @@
                     <button type="button" form="form-add-cash" class="btn btn-secondary"
                         data-bs-dismiss="modal">Close</button>
                     <button type="submit" form="form-add-cash" id="btn-save-cash" class="btn btn-dark">Save</button>
-                    <button type="button" form="form-add-cash" id="btn-save-updated-cash" style="display: none;" class="btn btn-dark">Update</button>
+                    <button type="button" form="form-add-cash" id="btn-save-updated-cash" style="display: none;"
+                        class="btn btn-dark">Update</button>
                 </div>
             </div>
         </div>
@@ -153,13 +156,12 @@
                         </div>
                     </div>
 
-                    <div class="row justify-content-end px-3">
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-danger" id="btn-delete-cash">Delete</button>
-                        </div>
+                    <div class="d-flex justify-content-end align-items-end">
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 10px;">Close</button>
+
+                        <button type="button" class="btn btn-danger" id="btn-delete-cash">Delete</button>
+
                     </div>
                 </div>
             </div>
