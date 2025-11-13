@@ -32,9 +32,9 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" placeholder="search here..."
-                            aria-label="search here..." aria-describedby="button-addon2">
-                        <button class="btn btn-dark" type="button" id="button-addon2">Search</button>
+                        <input type="text" class="form-control form-control-sm" id="search-cash" placeholder="search here..."
+                            aria-label="search here..." aria-describedby="btn-search-cash">
+                        <button class="btn btn-dark" type="button" id="btn-search-cash">Search</button>
                     </div>
                 </div>
             </div>
@@ -174,4 +174,5 @@
     <script type="module" src="{{ asset('js/pages/treasuries/cash-add.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-delete.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-update.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/cash-search.js') }}"></script>
 @endsection
