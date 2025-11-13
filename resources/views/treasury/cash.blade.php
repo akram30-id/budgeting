@@ -32,8 +32,8 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" id="search-cash" placeholder="search here..."
-                            aria-label="search here..." aria-describedby="btn-search-cash">
+                        <input type="text" class="form-control form-control-sm" id="search-cash"
+                            placeholder="search here..." aria-label="search here..." aria-describedby="btn-search-cash">
                         <button class="btn btn-dark" type="button" id="btn-search-cash">Search</button>
                     </div>
                 </div>
@@ -60,6 +60,21 @@
             </div>
         </div>
     </div>
+
+    <nav class="d-flex justify-content-end" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item disabled" id="btn-previous-cash">
+                <a class="page-link text-dark" href="#cash-records" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" id="btn-next-cash">
+                <a class="page-link text-dark" href="#cash-records" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 @endsection
 
 
@@ -158,7 +173,8 @@
 
                     <div class="d-flex justify-content-end align-items-end">
 
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 10px;">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            style="margin-right: 10px;">Close</button>
 
                         <button type="button" class="btn btn-danger" id="btn-delete-cash">Delete</button>
 
@@ -175,4 +191,5 @@
     <script type="module" src="{{ asset('js/pages/treasuries/cash-delete.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-update.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-search.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/cash-pagination.js') }}"></script>
 @endsection
