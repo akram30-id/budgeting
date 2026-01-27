@@ -125,9 +125,11 @@ class Treasury extends Model
             ->where('treasury_detail.treasury_no', $treasuryNo);
 
         if (!empty($search)) {
-            $data->where('treasury_detail.treasury_detail_name', 'like', '%' . $search . '%');
-            $data->orWhere('treasury_detail.notes', 'like', '%' . $search . '%');
-            $data->orWhere('treasury_detail.income_value', 'like', '%' . $search . '%');
+            $data->where(function ($q) use ($search) {
+                $q->where('treasury_detail.treasury_detail_name', 'like', '%' . $search . '%');
+                $q->orWhere('treasury_detail.notes', 'like', '%' . $search . '%');
+                $q->orWhere('treasury_detail.income_value', 'like', '%' . $search . '%');
+            });
         }
 
         return $data->orderBy('treasury_detail.id', 'asc')
@@ -281,6 +283,5 @@ class Treasury extends Model
             'message' => 'Successfully deleted',
             'code' => 200
         ];
-
     }
 }
