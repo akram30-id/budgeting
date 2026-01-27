@@ -102,7 +102,7 @@ class Treasury extends Model
         return $data;
     }
 
-    static function getTreasuryDetailByNo($treasuryNo, $ownerId, $page = 1, $limit = 15, $search = "")
+    static function getTreasuryDetailByNo($treasuryNo, $ownerId, $page = 1, $limit = 100, $search = "")
     {
 
         $masterTreasury = self::getTreasuryByNo($treasuryNo, $ownerId);
