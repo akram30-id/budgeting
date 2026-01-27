@@ -21,7 +21,7 @@ class TreasuryDetailController extends Controller
             $user = Auth::user();
 
             $page = intval($request->query('page', 1));
-            $length = intval($request->query('length', 15));
+            $length = intval($request->query('length', 100));
 
             $keywords = $request->query('keywords', '');
 
