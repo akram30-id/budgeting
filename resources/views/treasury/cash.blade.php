@@ -41,7 +41,7 @@
             <div class="table-responsive">
                 <table class="table table-striped-columns table-bordered table-hover fs-6">
                     <thead class="table-dark">
-                        <th>Detail No.</th>
+                        <th>Date Time</th>
                         <th>Detail</th>
                         <th>Month</th>
                         <th>Income</th>
