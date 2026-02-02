@@ -8,7 +8,7 @@ const loadTable = (data) => {
         data.forEach(element => {
             table.append(`
             <tr>
-                <td>${element.treasury_detail_no}</td>
+                <td>${new Date(element.created_at).toLocaleString('id-ID')}</td>
                 <td>${element.treasury_detail_name}</td>
                 <td>
                     ${new Date(element.month).toLocaleString('default', { month: 'long' })} ${element.year}
