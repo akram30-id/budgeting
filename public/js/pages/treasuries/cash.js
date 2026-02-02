@@ -3,16 +3,16 @@ import cashTable from "./cash-table.js";
 const treasuryNo = $("#treasury-no").data("treasury_no");
 
 let currentPage = 1;
-let currentLength = parseInt($("#select-length-treasury").val()) || 100;
+let currentLength = parseInt($("#select-length-treasury").val()) || 1000;
 let currentKeywords = "";
 
 $(document).ready(function () {
 
-    loadListDetailTreasury(1, 100, "");
+    loadListDetailTreasury(1, 1000, "");
 
 });
 
-export const loadListDetailTreasury = (page = 1, length = 100, keywords = "",) => {
+export const loadListDetailTreasury = (page = 1, length = 1000, keywords = "",) => {
     const url = $("#url-api").data("api_get_detail_treasury");
     const token = $("#token").data("access_token");
 
