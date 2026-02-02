@@ -187,6 +187,14 @@ class TreasuryDetailController extends Controller
                 ], 400);
             }
 
+            if ($updateData['income_value'] == "" || $updateData['income_value'] == "NaN") {
+                $updateData['income_value'] = 0;
+            }
+
+            if ($updateData['expense_value'] == "" || $updateData['expense_value'] == "NaN") {
+                $updateData['expense_value'] = 0;
+            }
+
             // 🔹 Lakukan update
             $updateChecked = Treasury::updateTreasuryDetail($request->treasury_detail_no, $updateData);
 
