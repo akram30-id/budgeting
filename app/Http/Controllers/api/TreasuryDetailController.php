@@ -168,11 +168,21 @@ class TreasuryDetailController extends Controller
             if ($request->has('is_debt'))
                 $updateData['is_debt'] = $request->is_debt;
 
-            if ($request->has('income_value'))
+            if ($request->has('income_value')) {
                 $updateData['income_value'] = $request->income_value;
 
-            if ($request->has('expense_value'))
+                if ($updateData['income_value'] == "" || $updateData['income_value'] == "NaN") {
+                    $updateData['income_value'] = 0;
+                }
+            }
+
+            if ($request->has('expense_value')) {
                 $updateData['expense_value'] = $request->expense_value;
+
+                if ($updateData['expense_value'] == "" || $updateData['expense_value'] == "NaN") {
+                    $updateData['expense_value'] = 0;
+                }
+            }
 
             if ($request->has('notes'))
                 $updateData['notes'] = $request->notes;
@@ -185,14 +195,6 @@ class TreasuryDetailController extends Controller
                     'success' => false,
                     'message' => 'No fields to update.'
                 ], 400);
-            }
-
-            if ($updateData['income_value'] == "" || $updateData['income_value'] == "NaN") {
-                $updateData['income_value'] = 0;
-            }
-
-            if ($updateData['expense_value'] == "" || $updateData['expense_value'] == "NaN") {
-                $updateData['expense_value'] = 0;
             }
 
             // 🔹 Lakukan update
