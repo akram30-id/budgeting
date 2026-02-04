@@ -73,7 +73,11 @@ export const loadListTreasury = (page = 1, length = 15, keywords = "") => {
         error: function (xhr, status, error) {
             const responseError = JSON.parse(xhr.responseText);
 
-            mainTable.loadTableFailed(responseError.message);
+            if (error === "Unauthorized") {
+                window.location.href = "/login";
+            } else {
+                mainTable.loadTableFailed(responseError.message);
+            }
         }
     });
 
