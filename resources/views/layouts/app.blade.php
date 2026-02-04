@@ -40,9 +40,13 @@
             {{-- Main Content --}}
             <main class="col-md-9 col-lg-10 p-4">
 
-                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
-                    <h2 class="fw-bold">{{ $pageTitle }}</h2>
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <h3 class="fw-bold">{{ $pageTitle }}</h3>
+
+                    @yield('optional-navbar')
                 </div>
+
+                <hr>
 
                 @yield('content')
 
