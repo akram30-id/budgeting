@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 use function GuzzleHttp\json_encode;
+use Illuminate\Support\Facades\Log;
 
 class Treasury extends Model
 {
@@ -132,7 +133,7 @@ class Treasury extends Model
             });
         }
 
-        return $data->orderBy('treasury_detail.id', 'asc')
+        return $data->orderBy('treasury_detail.sorts', 'asc')
             ->limit($limit)
             ->offset($offset)
             ->get();
@@ -218,6 +219,10 @@ class Treasury extends Model
 
             DB::beginTransaction();
 
+            $sorts = DB::table('treasury_detail', 'a')
+                ->where('a.treasury_no', '=', $treasuryNo)
+                ->max('a.sorts') + 1;
+
             $saveWithLastId = DB::table('treasury_detail')
                 ->insertGetId([
                     'treasury_no'           => $treasuryNo,
@@ -227,6 +232,7 @@ class Treasury extends Model
                     'expense_value'         => $data->expense,
                     'is_debt'               => $data->is_debt,
                     'user_id'               => $userId,
+                    'sorts'                 => $sorts,
                     'created_at'            => date('Y-m-d H:i:s'),
                     'updated_at'            => date('Y-m-d H:i:s'),
                 ]);
