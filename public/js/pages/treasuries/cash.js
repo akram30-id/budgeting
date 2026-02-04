@@ -42,7 +42,13 @@ export const loadListDetailTreasury = (page = 1, length = 1000, keywords = "",) 
         },
         error: function (xhr, status, error) {
             const responseError = JSON.parse(xhr.responseText);
-            cashTable.loadTableFailed(responseError.message);
+
+            if (error === "Unauthorized") {
+                window.location.href = "/login";
+            } else {
+                cashTable.loadTableFailed(responseError.message);
+            }
+
         }
     });
 }
