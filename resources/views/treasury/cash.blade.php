@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="url-api" data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
-        data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}" data-api_create_cash="{{ $apiCreateCash }}"
-        data-api_delete_cash="{{ $apiDeleteCash }}" data-api_detail_cash="{{ $apiDetailCash }}"></div>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
+
+    <div id="url-api"
+        data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
+        data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}"
+        data-api_create_cash="{{ $apiCreateCash }}"
+        data-api_delete_cash="{{ $apiDeleteCash }}"
+        data-api_detail_cash="{{ $apiDetailCash }}"
+        data-api_update_sort_cash={{ $apiUpdateSortCash }}></div>
     <div id="treasury-no" data-treasury_no="{{ $treasuryNo }}"></div>
     <div class="mb-4">
         <h3>Cash Detail</h3>
@@ -192,4 +198,7 @@
     <script type="module" src="{{ asset('js/pages/treasuries/cash-update.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-search.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-pagination.js') }}"></script>
+
+    <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/cash-sortable.js') }}"></script>
 @endsection
