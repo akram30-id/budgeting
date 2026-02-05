@@ -7,7 +7,7 @@ const loadTable = (data) => {
 
         data.forEach(element => {
             table.append(`
-            <tr data-sorts="${element.sorts}">
+            <tr data-sorts="${element.sorts}" data-treasury_detail_no="${element.treasury_detail_no}">
                 <td>${new Date(element.created_at).toLocaleString('id-ID')}</td>
                 <td>${element.treasury_detail_name}</td>
                 <td>
@@ -18,7 +18,7 @@ const loadTable = (data) => {
                 <td class="text-center align-middle">
                     <input class="form-check-input checkbox-treasury-detail" type="checkbox" style="border-width:2px;" ${element.is_checked == 1 ? "checked" : ""} value="" id="checkDefault" data-treasury_detail_no="${element.treasury_detail_no}">
                 </td>
-                <td>${Number(element.estimate_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+                <td class="estimate-value-cell" data-treasury_detail_no="${element.treasury_detail_no}">${Number(element.estimate_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td class="actual-value-cell" data-treasury_detail_no="${element.treasury_detail_no}">${Number(element.actual_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td>
                     <button class="btn btn-sm btn-outline-primary mb-2 btn-update-cash" data-treasury_detail_no="${element.treasury_detail_no}">Edit</button>
