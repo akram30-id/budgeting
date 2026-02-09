@@ -14,7 +14,7 @@ const loadTable = (data) => {
                     ${new Date(element.month).toLocaleString('default', { month: 'long' })} ${element.year}
                 </td>
                 <td>${Number(element.income_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
-                <td>${Number(element.expense_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+                <td class="expense-cell" data-value="${element.expense_value}">${Number(element.expense_value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td class="text-center align-middle">
                     <input class="form-check-input checkbox-treasury-detail" type="checkbox" style="border-width:2px;" ${element.is_checked == 1 ? "checked" : ""} value="" id="checkDefault" data-treasury_detail_no="${element.treasury_detail_no}">
                 </td>

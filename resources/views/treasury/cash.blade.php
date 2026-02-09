@@ -3,6 +3,17 @@
 @section('content')
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
 
+    <style>
+        #sticky-header {
+            position: sticky;
+            top: 0px;               /* jarak dari atas */
+            z-index: 1020;           /* di atas table */
+            background: white;       /* biar gak transparan */
+            padding: 5px 10px;
+        }
+
+    </style>
+
     <div id="url-api"
         data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
         data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}"
@@ -15,13 +26,24 @@
         <h3>Cash Detail</h3>
         <span class="badge text-bg-dark text-white">#{{ $treasuryNo }}</span>
     </div>
-    <div class="row mt-5">
+
+    {{-- STICKY AREA --}}
+    <div class="row mt-5 align-items-center justify-content-between" id="sticky-header">
         <div class="col-sm-3">
             <i>
-                <span class="fw-semibold" id="periode">Loading . . .</span>
+                <span class="fw-semibold fs-2" id="periode">Loading . . .</span>
             </i>
         </div>
-        <div class="col-sm-12 mt-5">
+        <div class="col-sm-3 fs-3 fw-semibold" id="cash-counter">
+            Total:
+            <span id="cash-counter-value">
+            </span>
+        </div>
+    </div>
+    {{-- END OF STICKY AREA --}}
+
+    <div class="row mt-4">
+        <div class="col-sm-12">
             <div class="row justify-content-between align-items-center">
                 <div class="col-sm-7">
                     <div class="mb-3">
@@ -198,6 +220,7 @@
     <script type="module" src="{{ asset('js/pages/treasuries/cash-update.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-search.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-pagination.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/treasuries/cash-counter.js') }}"></script>
 
     <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
     <script type="module" src="{{ asset('js/pages/treasuries/cash-sortable.js') }}"></script>
