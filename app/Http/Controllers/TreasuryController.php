@@ -26,6 +26,8 @@ class TreasuryController extends Controller
             'months'                => config('services.months_en'),
             'years'                 => $years,
             'api_create_treasury'   => config('services.app_url') . '/api/create-treasury',
+            'api_list_cash'         => config('services.app_url') . '/api/list-treasury-detail',
+            'api_duplicate_treasury'=> config('services.app_url_go') . '/api/treasury/duplicate',
         ];
 
         return view('treasury.index', $data);

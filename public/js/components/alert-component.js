@@ -1,13 +1,24 @@
 const alertFailed = (message) => {
-    const alertHTML = `<div class="alert alert-danger" role="alert">
-                        ${message}
-                        </div>`;
-    $("#alert-container").html(alertHTML);
-    setTimeout(() => {
-        $("#alert-container").html("");
-    }, 5000);
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${message}`
+    });
+}
+
+const alertSuccess = (message, redirect = null) => {
+    Swal.fire({
+        title: "Success!",
+        text: `${message}`,
+        icon: "success"
+    }).then(() => {
+        if (redirect) {
+            window.location.href = redirect
+        }
+    });
 }
 
 export default {
-    alertFailed
+    alertFailed,
+    alertSuccess
 }
