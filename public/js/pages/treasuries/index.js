@@ -63,8 +63,21 @@ export const loadListTreasury = (page = 1, length = 15, keywords = "") => {
             if (response.success) {
                 mainTable.loadTable(response.data);
 
-                if (response.data.length === 0) {
+                const data = response.data;
+
+                if (data.length === 0) {
                     mainTable.loadTableFailed("No data found.");
+                } else {
+                    $("#input-current-treasury").append(`<option value="">Choose Here</option>`)
+                    data.forEach(element => {
+                        $("#input-current-treasury").append(`
+                            <option value="${element.treasury_no}">${element.treasury_no} - ${new Date(element.month).toLocaleString('default', { month: 'long' })} ${element.year}</option>
+                        `)
+                    });
+
+                    $("#input-current-treasury").select2({
+                        dropdownParent: $("#treasuryModal") // modal tempat select berada
+                    });
                 }
             } else {
                 mainTable.loadTableFailed(response.message);
