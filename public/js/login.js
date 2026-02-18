@@ -10,7 +10,7 @@ form.on("submit", function (e) {
     const password = $("#inputPassword").val();
 
     if (!email || !password) {
-        alert("Email dan password wajib diisi.");
+        alertComponent.alertFailed("Email dan password wajib diisi.")
         return;
     }
 
@@ -65,3 +65,17 @@ const handleLoginSuccess = (token) => {
         },
     });
 };
+
+$("#btn-password-visible").on("click", function (e) {
+
+    e.preventDefault();
+
+    if ($("#inputPassword").attr('type') == "password") {
+        $(this).html(`<i class="bi bi-eye-slash" style="color: #c71306;"></i>`);
+        $("#inputPassword").attr('type', 'text');
+    } else {
+        $(this).html(`<i class="bi bi-eye"></i>`);
+        $("#inputPassword").attr('type', 'password');
+    }
+
+});

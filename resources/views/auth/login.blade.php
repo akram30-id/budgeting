@@ -12,6 +12,8 @@
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
 
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -45,8 +47,13 @@
 
                             <div class="mb-3">
                                 <label for="">Password</label>
-                                <input type="password" class="form-control form-control-sm" id="inputPassword"
-                                    placeholder="********">
+                                <div class="input-group mb-3">
+                                    <input type="password" id="inputPassword" class="form-control form-control-sm" placeholder="********"
+                                        aria-label="********" aria-describedby="btn-password-visible">
+                                    <button class="btn btn-outline-secondary" type="button" id="btn-password-visible">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="mb-3">
