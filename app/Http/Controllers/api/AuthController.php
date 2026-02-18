@@ -101,8 +101,10 @@ class AuthController extends Controller
             ], 401);
         }
 
+        $remember = $request->boolean('remember_me');
+
         // Generate token Sanctum
-        $token = $user->createToken('api-token')->plainTextToken;
+        $token = $user->createToken('api-token', ['*'], now()->addDays($remember ? 30 : 1))->plainTextToken;
 
         return response()->json([
             'success' => true,

@@ -8,6 +8,7 @@ form.on("submit", function (e) {
 
     const email = $("#inputEmail").val();
     const password = $("#inputPassword").val();
+    const rememberMe = $("#remember-me").is(":checked");
 
     if (!email || !password) {
         alertComponent.alertFailed("Email dan password wajib diisi.")
@@ -16,21 +17,21 @@ form.on("submit", function (e) {
 
     $("#btn-sign-in").text("Loading...");
 
-    submitLoginForm(email, password);
+    submitLoginForm(email, password, rememberMe);
 });
 
-const submitLoginForm = (email, password) => {
+const submitLoginForm = (email, password, rememberMe = false) => {
     const url = $("#url").data("api_login");
 
     $.ajax({
         type: "POST",
         url: url,
-        data: { email, password },
+        data: { email, password, remember: rememberMe },
         dataType: "json",
         success: function (response) {
             if (response && response.success && response.token) {
                 $("#btn-sign-in").text("Sign In");
-                handleLoginSuccess(response.token);
+                handleLoginSuccess(response.token, rememberMe);
             } else {
                 alertComponent.alertFailed(response.message || "Login gagal. Silakan coba lagi.");
             }
@@ -44,16 +45,17 @@ const submitLoginForm = (email, password) => {
     });
 };
 
-const handleLoginSuccess = (token) => {
+const handleLoginSuccess = (token, rememberMe = false) => {
     const url = $("#url").data("save_token");
 
     $.ajax({
         type: "POST",
         url: url,
         headers: csrf_setup.headers,
-        data: { access_token: token },
+        data: { access_token: token, remember: rememberMe },
         dataType: "json",
         success: function (response) {
+            console.info(response);
             if (response && response.success) {
                 window.location.href = "/";
             } else {

@@ -31,7 +31,7 @@
     <div id="url" data-api_logout="{{ config('services.app_url') . '/api/logout' }}"
         data-url_logout="{{ config('services.app_url') . '/logout' }}"></div>
 
-    <div id="token" data-access_token="{{ session('access_token') }}"></div>
+    <div id="token" data-access_token="{{ cookie('access_token') }}"></div>
 
     <div id="module" data-module_name="{{ $module ?? '' }}"></div>
 
