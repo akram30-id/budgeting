@@ -32,37 +32,23 @@ class UserController extends Controller
             $accessToken = $request->input('access_token');
             $remember = $request->boolean('remember');
 
+            $minutes = $remember ? 60 * 24 * 30 : 120;
+
+            config(['session.lifetime' => $minutes]);
+
             // Save the access token to the session
-            $request->session()->put('remember_me', $remember);
-
-            // set cookie duration
-            $minutes = $remember ? 60 * 24 * 30 : 60 * 24;
-            // // untuk testing
-            // $minutes = $remember ? 1 : 60 * 24;
-
-            $secure = config('session.secure', false);
+            $request->session()->put('access_token', $accessToken);
 
             return response()->json([
                 'success' => true,
-                'message' => 'Access token saved to session',
-                'ttl' => $minutes,
-                'secure' => $secure
-            ], 200)->withCookie(cookie(
-                'access_token',
-                $accessToken,
-                $minutes,
-                '/',
-                null,
-                $secure,
-                true
-            ));
+                'message' => 'Access token saved to session'
+            ], 200);
         } catch (\Throwable $th) {
 
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to save access token to session'
             ], 500);
-
         }
     }
 
@@ -71,8 +57,6 @@ class UserController extends Controller
         // Clear the access token from the session
         $request->session()->forget('access_token');
 
-        return redirect('/login')->withCookie(
-            cookie()->forget('access_token')
-        );
+        return redirect('/login');
     }
 }

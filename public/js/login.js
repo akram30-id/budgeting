@@ -55,7 +55,6 @@ const handleLoginSuccess = (token, rememberMe = false) => {
         data: { access_token: token, remember: rememberMe },
         dataType: "json",
         success: function (response) {
-            console.info(response);
             if (response && response.success) {
                 window.location.href = "/";
             } else {
