@@ -58,8 +58,8 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                                    <label class="form-check-label fs-6" for="checkDefault">
+                                    <input class="form-check-input" type="checkbox" value="" id="remember-me">
+                                    <label class="form-check-label fs-6" for="remember-me">
                                         Remember Me
                                     </label>
                                 </div>
