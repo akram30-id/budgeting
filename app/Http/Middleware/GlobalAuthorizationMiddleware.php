@@ -17,7 +17,7 @@ class GlobalAuthorizationMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if (!$request->cookie('access_token')) {
+        if (!$request->session('access_token')) {
             return redirect('/login');
         }
 
