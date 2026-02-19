@@ -103,6 +103,8 @@ class AuthController extends Controller
 
         $remember = $request->boolean('remember_me');
 
+        $user->tokens()->delete();
+
         // Generate token Sanctum
         $token = $user->createToken('api-token', ['*'], now()->addDays($remember ? 30 : 1))->plainTextToken;
 

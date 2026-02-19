@@ -32,12 +32,15 @@ class UserController extends Controller
             $accessToken = $request->input('access_token');
             $remember = $request->boolean('remember');
 
-            $minutes = $remember ? 60 * 24 * 30 : 120;
-
-            config(['session.lifetime' => $minutes]);
-
             // Save the access token to the session
             $request->session()->put('access_token', $accessToken);
+
+            if ($remember) {
+                cookie()->queue(
+                    cookie('remember_login', true, 60 * 24 * 30),
+                    cookie('token_in_cookie', $accessToken, 60 * 24 * 30)
+                );
+            }
 
             return response()->json([
                 'success' => true,
