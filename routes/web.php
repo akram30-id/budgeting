@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TreasuryController;
+// use App\Http\Controllers\DebtController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,9 @@ Route::prefix('treasury')->group(function () {
     Route::get('/', [TreasuryController::class, 'index'])->middleware('global.auth');
     Route::get('/detail', [TreasuryController::class, 'detail'])->middleware('global.auth');
 });
+
+Route::get('/settings', [SettingsController::class, 'index'])->middleware('global.auth');
+
+// Route::prefix('debt')->group(function () {
+//     Route::get('/', [DebtController::class, 'index'])->middleware('global.auth');
+// });
