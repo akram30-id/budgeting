@@ -77,8 +77,8 @@
                     <i class="bi bi-cash-coin"></i> Debts
                 </a>
             </li>
-            <li class="/settingsav-item">
-                <a href="#" class="nav-link d-flex align-items-center gap-2">
+            <li class="nav-item">
+                <a href="/settings" class="nav-link d-flex align-items-center gap-2">
                     <i class="bi bi-gear"></i> Settings
                 </a>
             </li>
