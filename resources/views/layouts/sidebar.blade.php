@@ -18,12 +18,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" data-module_name="debts" class="nav-link d-flex align-items-center gap-2">
+            <a href="/debt" data-module_name="debts" class="nav-link d-flex align-items-center gap-2">
                 <i class="bi bi-cash-coin"></i> Debts
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" data-module_name="settings" class="nav-link d-flex align-items-center gap-2">
+            <a href="/settings" data-module_name="settings" class="nav-link d-flex align-items-center gap-2">
                 <i class="bi bi-gear"></i> Settings
             </a>
         </li>
@@ -73,12 +73,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center gap-2">
+                <a href="/debt" class="nav-link d-flex align-items-center gap-2">
                     <i class="bi bi-cash-coin"></i> Debts
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center gap-2">
+                <a href="/settings" class="nav-link d-flex align-items-center gap-2">
                     <i class="bi bi-gear"></i> Settings
                 </a>
             </li>
