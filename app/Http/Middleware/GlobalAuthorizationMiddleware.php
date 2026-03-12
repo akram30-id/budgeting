@@ -18,20 +18,22 @@ class GlobalAuthorizationMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if (!$request->session('access_token') && $request->cookie('remember_login') && $request->cookie('token_in_cookie')) {
+        if (!$request->session()->get('access_token') && $request->cookie('remember_login') && $request->cookie('token_in_cookie')) {
             // VALIDASI TOKEN DI DB
-            $hashed = hash('sha256', $request->cookie('token_in_code'));
+            [$id, $plainToken] = explode('|', $request->cookie('token_in_cookie'), 2);
 
-            $token = PersonalAccessToken::where('token', $hashed)
-                ->where('expires_at', '>', now())
-                ->first();
+            $token = PersonalAccessToken::find($id);
 
-            if ($token) {
+            // $token = PersonalAccessToken::where('token', $hashed)
+            //     ->where('expires_at', '>', now())
+            //     ->first();
+
+            if ($token && hash_equals($token->token, hash('sha256', $plainToken)) && (!$token->expires_at || $token->expires_at->isFuture())) {
                 $request->session()->put('access_token', $request->cookie('token_in_cookie'));
             }
         }
 
-        if (!$request->session('access_token')) {
+        if (!$request->session()->get('access_token')) {
             return redirect('/login');
         }
 
