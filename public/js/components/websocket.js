@@ -45,9 +45,10 @@ $(document).ready(function () {
 
     function connectWebSocket() {
         const url = $("#url").data("url_go");
+        const protocol = window.location.protocol === "https:" ? "wss" : "ws";
         let cleanURL = url.replace("http://", "").replace("https://", "");
 
-        socket = new WebSocket(`ws://${cleanURL}/ws/${currentUserId}`);
+        socket = new WebSocket(`${protocol}://${cleanURL}/ws/${currentUserId}`);
 
         socket.onopen = function () {
             console.log("Connected to Real-time Notification Server");
