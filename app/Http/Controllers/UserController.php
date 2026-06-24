@@ -31,13 +31,16 @@ class UserController extends Controller
 
             $accessToken = $request->input('access_token');
             $remember = $request->boolean('remember');
+            $userId = $request->input('user_id');
 
             // Save the access token to the session
             $request->session()->put('access_token', $accessToken);
+            $request->session()->put('user_id', $userId);
 
             if ($remember) {
                 cookie()->queue(cookie('remember_login', true, 60 * 24 * 30));
                 cookie()->queue(cookie('token_in_cookie', $accessToken, 60 * 24 * 30));
+                cookie()->queue(cookie('user_id', $userId, 60 * 24 * 30));
             }
 
             return response()->json([

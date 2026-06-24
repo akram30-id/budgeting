@@ -32,6 +32,7 @@ class Treasury extends Model
                 SELECT COUNT(id)
                 FROM treasury_members
                 WHERE treasury_members.treasury_no = treasuries.treasury_no
+                AND treasury_members.state=1
             ) AS total_members'),
                 DB::raw('(
                 SELECT name

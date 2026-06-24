@@ -28,6 +28,8 @@ class TreasuryController extends Controller
             'api_create_treasury'   => config('services.app_url') . '/api/create-treasury',
             'api_list_cash'         => config('services.app_url') . '/api/list-treasury-detail',
             'api_duplicate_treasury'=> config('services.app_url_go') . '/api/treasury/duplicate',
+            'api_show_list_members' => config('services.app_url_go') . '/api/treasury/members',
+            'api_find_users'        => config('services.app_url_go') . '/api/treasury/find-users'
         ];
 
         return view('treasury.index', $data);
