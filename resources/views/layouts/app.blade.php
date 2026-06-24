@@ -35,7 +35,7 @@
 
     <div id="token" data-access_token="{{ session('access_token') }}"></div>
 
-    <div id="user" data-id="{{ session('user_id') }}"></div>
+    <div id="user" data-id="{{ session('user_id') ?? request()->cookie('user_id') }}"></div>
 
     <div id="module" data-module_name="{{ $module ?? '' }}"></div>
 
