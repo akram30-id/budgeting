@@ -58,15 +58,51 @@ p {
 
 .sidebar {
     position: relative;
-    min-height: 100vh; /* ensures it fills full height */
+    min-height: 100vh;
+    /* ensures it fills full height */
 }
 
 .sidebar-gif {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    width: 80px;        /* adjust as needed */
-    border-radius: 8px; /* optional */
-    pointer-events: none; /* so clicks pass through */
+    width: 80px;
+    /* adjust as needed */
+    border-radius: 8px;
+    /* optional */
+    pointer-events: none;
+    /* so clicks pass through */
 }
 
+.list-notif:hover {
+    background-color: rgba(50, 133, 119, 0.1);
+}
+
+#toastPlacement {
+    min-width: 350px;
+    /* Lebar standar toast agar konsisten di tengah */
+}
+
+.toast {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    opacity: 1 !important;
+    /* Mencegah transparansi saat hover/idle */
+}
+
+.toast-header {
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+
+
+.sticky-header-custom {
+    position: sticky;
+    top: 0px;
+    /* jarak dari atas */
+    z-index: 4;
+    /* di atas table */
+    background: white;
+    /* biar gak transparan */
+    padding: 5px 10px;
+}

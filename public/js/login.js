@@ -28,10 +28,13 @@ const submitLoginForm = (email, password, rememberMe = false) => {
         url: url,
         data: { email, password, remember: rememberMe },
         dataType: "json",
+        async: false,
         success: function (response) {
+            const user = response.user;
+            const userId = user.id;
             if (response && response.success && response.token) {
                 $("#btn-sign-in").text("Sign In");
-                handleLoginSuccess(response.token, rememberMe);
+                handleLoginSuccess(response.token, rememberMe, userId);
             } else {
                 alertComponent.alertFailed(response.message || "Login gagal. Silakan coba lagi.");
             }
@@ -45,14 +48,14 @@ const submitLoginForm = (email, password, rememberMe = false) => {
     });
 };
 
-const handleLoginSuccess = (token, rememberMe = false) => {
+const handleLoginSuccess = (token, rememberMe = false, userId) => {
     const url = $("#url").data("save_token");
 
     $.ajax({
         type: "POST",
         url: url,
         headers: csrf_setup.headers,
-        data: { access_token: token, remember: rememberMe },
+        data: { access_token: token, remember: rememberMe, user_id: userId },
         dataType: "json",
         success: function (response) {
             if (response && response.success) {

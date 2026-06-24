@@ -18,7 +18,25 @@ const alertSuccess = (message, redirect = null) => {
     });
 }
 
+
+const alertConfirmation = (question, message, btnText, act) => {
+    Swal.fire({
+        title: question,
+        text: message,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: btnText
+    }).then((result) => {
+        if (result.isConfirmed) {
+            act();
+        }
+    });
+}
+
 export default {
     alertFailed,
-    alertSuccess
+    alertSuccess,
+    alertConfirmation
 }

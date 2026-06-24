@@ -30,6 +30,7 @@ class GlobalAuthorizationMiddleware
 
             if ($token && hash_equals($token->token, hash('sha256', $plainToken)) && (!$token->expires_at || $token->expires_at->isFuture())) {
                 $request->session()->put('access_token', $request->cookie('token_in_cookie'));
+                $request->session()->put('user_id', $request->cookie('user_id'));
             }
         }
 

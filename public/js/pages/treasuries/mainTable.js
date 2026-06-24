@@ -11,7 +11,7 @@ const loadTable = (data) => {
             <td>${new Date(element.month).toLocaleString('default', { month: 'long' })}</td>
             <td>${element.year}</td>
             <td><a class="text-decoration-none text-money fw-bold" href="/treasury/detail?treasury=${element.treasury_no}">${element.total_records}</a></td>
-            <td><a class="text-decoration-none text-money fw-bold" href="/treasury/member?treasury=${element.treasury_no}">${element.total_members}</a></td>
+            <td><a class="text-decoration-none text-money fw-bold show-treasury-members" data-treasury_no="${element.treasury_no}" data-bs-toggle="modal" data-bs-target="#modalTreasuryMember" href="#">${element.total_members}</a></td>
             <td>${element.owner_name}</td>
             <td>${formatDate(new Date(element.created_at))}</td>
             <td>

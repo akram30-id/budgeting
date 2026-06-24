@@ -3,17 +3,6 @@
 @section('content')
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
 
-    <style>
-        #sticky-header {
-            position: sticky;
-            top: 0px;               /* jarak dari atas */
-            z-index: 1020;           /* di atas table */
-            background: white;       /* biar gak transparan */
-            padding: 5px 10px;
-        }
-
-    </style>
-
     <div id="url-api"
         data-api_get_detail_treasury="{{ $apiGetDetailTreasury }}"
         data-api_update_checked="{{ $apiUpdateCheckedTreasuryDetail }}"
@@ -28,7 +17,7 @@
     </div>
 
     {{-- STICKY AREA --}}
-    <div class="row mt-5 align-items-center justify-content-between" id="sticky-header">
+    <div class="row mt-5 align-items-center justify-content-between sticky-header-custom">
         <div class="col-sm-3">
             <i>
                 <span class="fw-semibold fs-2" id="periode">Loading . . .</span>

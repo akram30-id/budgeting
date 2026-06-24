@@ -86,7 +86,8 @@ $(document).on("click touchstart", ".checkbox-treasury-detail", function () {
         },
         error: function (xhr, status, error) {
             const responseError = JSON.parse(xhr.responseText);
-            toastr.error(responseError.message);
+            $(`.checkbox-treasury-detail[data-treasury_detail_no='${treasuryDetailNo}'`).prop("checked", !isChecked);
+            alert(responseError.message);
         }
     });
 

@@ -8,13 +8,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" data-module_name="projects" class="nav-link d-flex align-items-center gap-2">
-                <i class="bi bi-folder"></i> Projects
+            <a href="/treasury" data-module_name="treasuries" class="nav-link d-flex align-items-center gap-2">
+                <i class="bi bi-bank"></i> Treasuries
             </a>
         </li>
         <li class="nav-item">
-            <a href="/treasury" data-module_name="treasuries" class="nav-link d-flex align-items-center gap-2">
-                <i class="bi bi-bank"></i> Treasuries
+            <a href="/friends" data-module_name="friends" class="nav-link d-flex align-items-center gap-2">
+                <i class="bi bi-people"></i> Friends
             </a>
         </li>
         <li class="nav-item">
