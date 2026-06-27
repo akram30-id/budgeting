@@ -19,8 +19,6 @@ $("#btn-delete-cash").on("click touchstart", function () {
 
     const cashNo = $("#cash-no-delete").val();
 
-    console.info(cashNo);
-
     const url = $("#url-api").data("api_delete_cash");
     const token = $("#token").data("access_token");
 
