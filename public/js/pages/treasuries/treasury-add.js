@@ -100,8 +100,6 @@ $("#form-add-treasury").on("submit", function (e) {
 
                 listCashDuplicate.push(cashNo);
             }
-
-            console.info(listCashDuplicate);
         });
 
         $("#btn-submit-duplicate-cash").on("click", function () {
@@ -170,7 +168,6 @@ $("#form-add-treasury").on("submit", function (e) {
             data: data,
             dataType: "json",
             success: function (response) {
-                console.info(response);
 
                 if (response.success) {
                     loadListTreasury();

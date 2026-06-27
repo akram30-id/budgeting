@@ -44,8 +44,6 @@ const showCurrentNotif = () => {
     const limit = 3;
     const page = 1;
 
-    console.info(token);
-
     $(".notif-actions").html("");
 
     $.ajax({
@@ -149,7 +147,6 @@ $(document).on('click', '.btn-notif-accept', function (e) {
         }
         parsedData = JSON.parse(rawData);
     } catch (err) {
-        console.error('Gagal parse data notifikasi:', err);
         Swal.fire({
             icon: 'error',
             title: 'Terjadi Kesalahan',
@@ -174,7 +171,6 @@ $(document).on('click', '.btn-notif-accept', function (e) {
     // ========== FIX #3b: Additional validation ==========
     const trimmedTreasuryNo = String(treasuryNo).trim();
     if (!trimmedTreasuryNo || trimmedTreasuryNo === 'undefined' || trimmedTreasuryNo === 'null') {
-        console.error('Invalid treasury_no value:', treasuryNo);
         Swal.fire({
             icon: 'error',
             title: 'Data Treasury Tidak Valid',
