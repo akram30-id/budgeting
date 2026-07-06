@@ -124,5 +124,11 @@
                 }
             }
         });
+
+        Swal.fire({
+            title: "Penutupan Layanan",
+            text: "Layanan ini akan ditutup tanggal 31 Juli 2026. Mohon backup data Anda sebelum layanan ditutup.",
+            icon: "info"
+        });
     </script>
 @endsection
